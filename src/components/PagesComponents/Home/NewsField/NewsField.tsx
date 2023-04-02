@@ -1,14 +1,13 @@
 import { FC, useCallback, useState } from 'react';
 import { Formik, Field } from 'formik';
 import { FormikHelpers } from 'formik';
-import Dropzone, { useDropzone } from 'react-dropzone';
+import { useDropzone } from 'react-dropzone';
 //
-import ButtonSubmit from '../Buttons/ButtonSubmit/ButtonSubmit';
+import ButtonSubmit from '../../../Buttons/ButtonSubmit/ButtonSubmit';
 //
 import { INewsFormValues } from '@/types/newsFormValues';
 import add from '@/assets/icons/add.svg';
 import admin from '@/assets/icons/admin1.svg';
-import remove from '@/assets/icons/remove.svg';
 
 interface FileInfo {
   file: File | null;
@@ -49,7 +48,6 @@ const NewsField: FC = () => {
           handleBlur,
           values,
           errors,
-          setFieldValue,
           touched,
         }) => (
           <form onSubmit={handleSubmit}>
