@@ -1,13 +1,9 @@
 import { FC, memo } from 'react';
 import admin from '@/assets/icons/admin1.svg';
+import { INews } from '@/types/newsTypes';
 
-interface INewsItemProps {
-  item: {
-    title: string;
-    header: string;
-    id: string;
-    data: string;
-  };
+export interface INewsItemProps {
+  item: INews;
 }
 
 const NewsItem: FC<INewsItemProps> = ({ item: { header, title, data } }) => {

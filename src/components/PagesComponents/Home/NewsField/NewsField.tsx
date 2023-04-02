@@ -9,16 +9,13 @@ import { INewsFormValues } from '@/types/newsFormValues';
 import add from '@/assets/icons/add.svg';
 import admin from '@/assets/icons/admin1.svg';
 
-interface FileInfo {
-  file: File | null;
-}
-
 const NewsField: FC = () => {
   const [file, setFile] = useState<File | null>(null);
   const handleSubmitNews = async (
     values: INewsFormValues,
     actions: FormikHelpers<INewsFormValues>
   ) => {
+    actions.resetForm();
     console.log(values, file);
   };
 

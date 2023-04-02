@@ -1,11 +1,13 @@
+import { INews } from '@/types/newsTypes';
 import { FC } from 'react';
+//
 import NewsItem from './NewsItem/NewsItem';
 
 const News: FC = () => {
   return (
     <div className='bg-white w-full rounded-[8px] p-[20px]'>
-      {futureNews ? (
-        futureNews.map((item) => <NewsItem item={item} key={item.id} />)
+      {futureNews.length ? (
+        futureNews.map((item: INews) => <NewsItem item={item} key={item.id} />)
       ) : (
         <p>Новин наразі немає</p>
       )}
@@ -13,7 +15,7 @@ const News: FC = () => {
   );
 };
 
-const futureNews = [
+const futureNews: INews[] = [
   {
     id: '1',
     title:
