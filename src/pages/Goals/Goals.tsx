@@ -10,6 +10,8 @@ const Goals: FC = () => {
           <li>3</li>
           <li>3</li>
           <li>3</li>
+          <li>3</li>
+          <li>3</li>
         </ul>
       </div>
     </ContentWrapper>
