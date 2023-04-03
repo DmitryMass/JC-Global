@@ -1,5 +1,5 @@
 export const homeNewsStyles = {
-  wrapper: 'w-full bg-white mb-[30px] p-[20px] rounded-[8px]',
+  wrapper: 'w-full bg-white mb-[30px] p-[20px] rounded-[8px] shadow-md',
   inputWrapper: 'flex justify-start items-center gap-[20px]',
   input:
     'w-full outline-none border-[1px] border-opacity-10 border-black p-[5px] rounded-[4px] text-m leading-m font-medium h-[33px] max-h-[135px] resize-y',

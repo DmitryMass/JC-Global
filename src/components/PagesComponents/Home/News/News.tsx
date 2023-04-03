@@ -6,13 +6,13 @@ import { INews } from '@/types/newsTypes';
 
 const News: FC = () => {
   return (
-    <div className='bg-white w-full rounded-[8px] p-[20px]'>
+    <>
       {futureNews.length ? (
         futureNews.map((item: INews) => <NewsItem item={item} key={item.id} />)
       ) : (
         <p>Новин наразі немає</p>
       )}
-    </div>
+    </>
   );
 };
 
