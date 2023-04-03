@@ -1,8 +1,8 @@
 import { FC } from 'react';
 //
-import dark from '@/assets/icons/dark_theme.svg';
-import light from '@/assets/icons/light_theme.svg';
+
 import { themeStyles } from '@/styles/themeStyles';
+import { dark, light } from '@/data/svgStore';
 
 const Theme: FC = () => {
   return (

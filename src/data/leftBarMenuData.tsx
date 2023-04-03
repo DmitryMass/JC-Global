@@ -1,6 +1,4 @@
-import about from '@/assets/imgs/aboutUs.jpg';
-import goals from '@/assets/icons/goals.svg';
-import team from '@/assets/icons/team.svg';
+import { about, goals, team } from './svgStore';
 
 export const leftBarMenu = [
   {

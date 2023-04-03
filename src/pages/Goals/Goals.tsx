@@ -1,4 +1,5 @@
 import { FC } from 'react';
+//
 import ContentWrapper from '@/components/ContentWrapper/ContentWrapper';
 
 const Goals: FC = () => {

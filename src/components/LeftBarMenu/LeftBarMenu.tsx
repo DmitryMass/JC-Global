@@ -5,8 +5,8 @@ import Theme from '../Theme/Theme';
 //
 import { leftBarMenu } from '@/data/leftBarMenuData';
 //
+import { admin } from '@/data/svgStore';
 import { leftBarnMenuStyles } from '@/styles/leftBarMenuStyles';
-import admin from '@/assets/icons/admin1.svg';
 
 const LeftBarMenus: FC = () => {
   return (

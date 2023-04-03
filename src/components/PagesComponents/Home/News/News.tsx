@@ -1,7 +1,8 @@
-import { INews } from '@/types/newsTypes';
 import { FC } from 'react';
 //
 import NewsItem from './NewsItem/NewsItem';
+//
+import { INews } from '@/types/newsTypes';
 
 const News: FC = () => {
   return (
