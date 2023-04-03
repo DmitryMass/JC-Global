@@ -1,5 +1,6 @@
 // MainLogo
 import logo from '@/assets/icons/logo.svg';
+import logoblack from '@/assets/icons/logo-black.svg';
 // Additional
 import add from '@/assets/icons/add.svg';
 // Menu
@@ -11,4 +12,4 @@ import team from '@/assets/icons/team.svg';
 import dark from '@/assets/icons/dark_theme.svg';
 import light from '@/assets/icons/light_theme.svg';
 //
-export { add, admin, logo, about, goals, team, dark, light };
+export { add, admin, logo, about, goals, team, dark, light, logoblack };

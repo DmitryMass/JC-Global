@@ -3,16 +3,24 @@ import { Link } from 'react-router-dom';
 //
 import { ROUTE } from '@/utils/routes';
 import { logo } from '@/data/svgStore';
+import { logoblack } from '@/data/svgStore';
 
-const Logo: FC = () => {
+interface ILogoProps {
+  imgModificator?: boolean;
+  modificator?: string;
+}
+
+const Logo: FC<ILogoProps> = ({ imgModificator, modificator }) => {
   return (
-    <Link to={ROUTE.HOME}>
-      <img
-        className='w-[120px] h-[60px] min-[768px]:ml-[20px]'
-        src={logo}
-        alt='JC-Global'
-      />
-    </Link>
+    <>
+      {imgModificator ? (
+        <Link to={ROUTE.HOME}>
+          <img className={modificator} src={logo} alt='JC-Global white' />
+        </Link>
+      ) : (
+        <img className={modificator} src={logoblack} alt='JC-Global black' />
+      )}
+    </>
   );
 };
 
