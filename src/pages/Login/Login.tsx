@@ -53,7 +53,7 @@ const Login: FC = () => {
                 <form onSubmit={handleSubmit}>
                   <label className='block mb-[20px]' htmlFor='email'>
                     <Field
-                      className='outline-none border-[2px] border-darkBlue border-opacity-20 rounded-[4px] w-full p-[10px] font-semibold text-m leading-m bg-blue-50'
+                      className='outline-none border-[2px] border-blue-600 border-opacity-20 rounded-[4px] w-full p-[10px] font-semibold text-m leading-m bg-blue-50 placeholder:text-blue-400 placeholder:font-medium placeholder:opacity-70'
                       id='email'
                       onChange={handleChange}
                       onBlur={handleBlur}
@@ -65,7 +65,7 @@ const Login: FC = () => {
                   </label>
                   <label className='block mb-[20px]' htmlFor='password'>
                     <Field
-                      className='outline-none border-[2px] border-darkBlue border-opacity-20 rounded-[4px] w-full p-[10px] font-semibold text-m leading-m bg-blue-50'
+                      className='outline-none border-[2px] border-blue-600 border-opacity-20 rounded-[4px] w-full p-[10px] font-semibold text-m leading-m bg-blue-50 placeholder:text-blue-400 placeholder:font-medium placeholder:opacity-70'
                       id='password'
                       onChange={handleChange}
                       onBlur={handleBlur}
@@ -75,9 +75,12 @@ const Login: FC = () => {
                       placeholder='Password'
                     />
                   </label>
-                  <ButtonSubmit modificator='block w-full bg-darkBlue p-[10px] rounded-[4px] text-white text-l leading-l'>
+                  <ButtonSubmit modificator='block w-full bg-blue-700 shadow-sm shadow-blue-400 hover:shadow-md hover:shadow-blue-300 transition-all duration-150 p-[10px] rounded-[4px] text-white text-l leading-l mb-[20px]'>
                     Login
                   </ButtonSubmit>
+                  <span className='block border-b-[1px] border-blue-200 pb-[70px] text-right text-sm leading-sm text-blue-600'>
+                    Reset password
+                  </span>
                 </form>
               )}
             </Formik>
