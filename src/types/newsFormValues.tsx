@@ -1,4 +1,4 @@
 export interface INewsFormValues {
   text: string;
-  newsImg?: any;
+  header: string;
 }

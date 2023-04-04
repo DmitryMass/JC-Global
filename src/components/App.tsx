@@ -16,7 +16,7 @@ import {
 import './App.scss';
 
 const App: FC = () => {
-  const user = false;
+  const user = true;
 
   return (
     <div className='app relative'>

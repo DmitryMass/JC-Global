@@ -1,5 +1,5 @@
 export const newsItemStyles = {
-  wrapper: 'bg-white w-full rounded-[8px] p-[20px] shadow-sm',
+  wrapper: 'bg-white w-full rounded-[8px] p-[20px] shadow-sm mb-[20px]',
   titleImgContainer: 'flex gap-[15px] items-center mb-[20px]',
   title:
     'text-l leading-l font-semibold text-ellipsis grow overflow-hidden whitespace-nowrap',

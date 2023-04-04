@@ -15,7 +15,7 @@ const NewsField: FC = () => {
   return (
     <>
       <Formik
-        initialValues={{ text: '' }}
+        initialValues={{ text: '', header: '' }}
         onSubmit={handleSubmitNews}
         validationSchema={''}
       >
@@ -30,31 +30,49 @@ const NewsField: FC = () => {
           <form onSubmit={handleSubmit}>
             <div className={homeNewsStyles.inputWrapper}>
               <img className='w-[45px]' src={admin} alt='admin logo' />
-              <label className='block w-full' htmlFor='text'>
-                {touched.text && errors.text && (
-                  <span className=''>{errors.text}</span>
-                )}
-                <Field
-                  className={homeNewsStyles.input}
-                  id='text'
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  value={values.text}
-                  name='text'
-                  component='textarea'
-                  placeholder='Введіть нове оголошення або новину'
-                />
-              </label>
+              <div className='w-full'>
+                <label className='block w-full' htmlFor='header'>
+                  {touched.header && errors.header && (
+                    <span className=''>{errors.header}</span>
+                  )}
+                  <Field
+                    className={homeNewsStyles.input}
+                    id='header'
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    value={values.header}
+                    name='header'
+                    placeholder='Введіть загаловок'
+                  />
+                </label>
+                <label className='block w-full' htmlFor='text'>
+                  {touched.text && errors.text && (
+                    <span className=''>{errors.text}</span>
+                  )}
+                  <Field
+                    className={homeNewsStyles.textarea}
+                    id='text'
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    value={values.text}
+                    name='text'
+                    component='textarea'
+                    placeholder='Введіть нове оголошення або новину'
+                  />
+                </label>
+              </div>
             </div>
             <div className={homeNewsStyles.dropzoneWrapper}>
               <div {...getRootProps()}>
                 <input {...getInputProps()} />
                 {isDragActive ? (
-                  <img className='w-[25px]' src={add} alt='add img' />
+                  <>
+                    <img className='w-[25px]' src={add} alt='add img' />
+                  </>
                 ) : (
                   <div className='flex items-center gap-[10px]'>
                     <span className={homeNewsStyles.fileNameSpan}>
-                      {file?.name}
+                      <span> {file ? `${file.length} files` : ''}</span>
                     </span>
                     <img className='w-[25px]' src={add} alt='add img' />
                   </div>

@@ -1,6 +1,8 @@
 export interface INews {
-  title: string;
+  _id?: string;
+  text: string;
   header: string;
-  id: string;
-  data: string;
+  imgPath: any[];
+  checked: any[];
+  createdAt: string;
 }

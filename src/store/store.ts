@@ -13,6 +13,7 @@ import {
 } from 'redux-persist';
 
 import { setupListeners } from '@reduxjs/toolkit/query';
+import { newsApi } from './api/newsApi';
 
 const persistConfig = {
   key: 'root',
@@ -22,6 +23,7 @@ const persistConfig = {
 
 const reducers = combineReducers({
   persistSlice: persistReducer(persistConfig, persistSliceReducer),
+  [newsApi.reducerPath]: newsApi.reducer,
 });
 
 const store = configureStore({
@@ -31,7 +33,7 @@ const store = configureStore({
       serializableCheck: {
         ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
       },
-    }).concat(),
+    }).concat(newsApi.middleware),
 });
 
 setupListeners(store.dispatch);
