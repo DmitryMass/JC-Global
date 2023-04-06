@@ -31,7 +31,7 @@ const NewsItem: FC<INewsItemProps> = ({
         />
       ) : null}
       <div className={newsItemStyles.titleImgContainer}>
-        <img className='w-[35px]' src={admin} alt='admin photo' />
+        <img className='w-[40px]' src={admin} alt='admin photo' />
         <h2 className={newsItemStyles.title}>{header}</h2>
         <span className={newsItemStyles.data}>{date}</span>
         {isAdmin ? (

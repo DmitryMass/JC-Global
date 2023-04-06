@@ -42,6 +42,8 @@ module.exports = {
         white: 'white',
         black: 'black',
         darkBlue: '#004282',
+        gray: 'gray',
+        blueOpacity: '#2b3b4ede',
       },
     },
   },
