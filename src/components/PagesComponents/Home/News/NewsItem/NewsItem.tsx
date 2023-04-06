@@ -7,7 +7,7 @@ import { convertDate } from '@/utils/additionalFunc/dateConvert';
 import { INews } from '@/types/newsTypes';
 import { CustomError } from '@/types/errors';
 //
-import { admin, deleteLogo } from '@/data/svgStore';
+import { admin, deleteLogo, edit } from '@/data/svgStore';
 //
 import { newsItemStyles } from '@/styles/newsItem';
 import Loader from '@/components/Loader/Loader';
@@ -35,16 +35,18 @@ const NewsItem: FC<INewsItemProps> = ({
         <h2 className={newsItemStyles.title}>{header}</h2>
         <span className={newsItemStyles.data}>{date}</span>
         {isAdmin ? (
-          <button
-            onClick={() => deleteNews(_id as string)}
-            className={newsItemStyles.deleteBtn}
-          >
-            {isLoading ? (
-              <Loader />
-            ) : (
-              <img className='w-[25px]' src={deleteLogo} alt='delete' />
-            )}
-          </button>
+          <div className={newsItemStyles.adminBtns}>
+            <button onClick={() => {}}>
+              <img className='w-[25px]' src={edit} alt='edit' />
+            </button>
+            <button onClick={() => deleteNews(_id as string)}>
+              {isLoading ? (
+                <Loader />
+              ) : (
+                <img className='w-[25px]' src={deleteLogo} alt='delete' />
+              )}
+            </button>
+          </div>
         ) : null}
       </div>
       <h2 className={newsItemStyles.titleMobile}>{header}</h2>

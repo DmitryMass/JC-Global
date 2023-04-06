@@ -4,6 +4,7 @@ import logoblack from '@/assets/icons/logo-black.svg';
 // Additional
 import add from '@/assets/icons/add.svg';
 import close from '@/assets/icons/remove.svg';
+import edit from '@/assets/icons/edit_logo.svg';
 // Menu
 import admin from '@/assets/icons/admin1.svg';
 import about from '@/assets/imgs/aboutUs.jpg';
@@ -27,4 +28,5 @@ export {
   logoblack,
   deleteLogo,
   close,
+  edit,
 };
