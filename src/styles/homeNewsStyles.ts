@@ -1,7 +1,8 @@
 export const homeNewsStyles = {
-  wrapper:
-    'w-full bg-white mb-[30px] px-[20px] py-[30px] pb-[20px] rounded-[8px] shadow-md',
-  inputWrapper: 'flex justify-start items-start gap-[20px]',
+  wrapper: 'w-full bg-white mb-[30px] p-[20px] rounded-[8px] shadow-md',
+  inputWrapper: 'flex justify-start items-start gap-[20px] max-[576px]:block',
+  imgWrapper: 'flex items-center max-[576px]:mb-[20px] gap-[10px]',
+  adminSpan: 'max-[576px]:block hidden text-m leading-m font-semibold',
   errorSpan:
     'text-sm leading-sm font-medium absolute top-[-18px] left-[2px] text-red-700',
   textarea:

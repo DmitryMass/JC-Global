@@ -46,7 +46,10 @@ const NewsField: FC = () => {
         }) => (
           <form onSubmit={handleSubmit}>
             <div className={homeNewsStyles.inputWrapper}>
-              <img className='w-[45px]' src={admin} alt='admin logo' />
+              <div className={homeNewsStyles.imgWrapper}>
+                <img className='w-[45px]' src={admin} alt='admin logo' />
+                <span className={homeNewsStyles.adminSpan}>Admin</span>
+              </div>
               <div className='w-full'>
                 <label className='block w-full relative' htmlFor='header'>
                   {touched.header && errors.header && (
@@ -78,7 +81,7 @@ const NewsField: FC = () => {
                     value={values.text}
                     name='text'
                     component='textarea'
-                    placeholder='Введіть нове оголошення або новину'
+                    placeholder='Введіть новину'
                   />
                 </label>
               </div>
