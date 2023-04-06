@@ -28,7 +28,15 @@ export const newsApi = createApi({
       }),
       invalidatesTags: [{ type: 'News', id: 'newsList' }],
     }),
+    deleteNews: build.mutation<{ msg: string }, string>({
+      query: (id) => ({
+        url: `/admin/news/${id}`,
+        method: 'DELETE',
+      }),
+      invalidatesTags: [{ type: 'News', id: 'newsList' }],
+    }),
   }),
 });
 
-export const { useCreateNewsMutation, useGetNewsQuery } = newsApi;
+export const { useCreateNewsMutation, useGetNewsQuery, useDeleteNewsMutation } =
+  newsApi;

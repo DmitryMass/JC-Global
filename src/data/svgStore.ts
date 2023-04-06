@@ -3,6 +3,7 @@ import logo from '@/assets/icons/logo.svg';
 import logoblack from '@/assets/icons/logo-black.svg';
 // Additional
 import add from '@/assets/icons/add.svg';
+import close from '@/assets/icons/remove.svg';
 // Menu
 import admin from '@/assets/icons/admin1.svg';
 import about from '@/assets/imgs/aboutUs.jpg';
@@ -12,4 +13,18 @@ import team from '@/assets/icons/team.svg';
 import dark from '@/assets/icons/dark_theme.svg';
 import light from '@/assets/icons/light_theme.svg';
 //
-export { add, admin, logo, about, goals, team, dark, light, logoblack };
+import deleteLogo from '@/assets/icons/delete_logo.svg';
+
+export {
+  add,
+  admin,
+  logo,
+  about,
+  goals,
+  team,
+  dark,
+  light,
+  logoblack,
+  deleteLogo,
+  close,
+};

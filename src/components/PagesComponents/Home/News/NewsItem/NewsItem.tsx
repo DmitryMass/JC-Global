@@ -1,24 +1,53 @@
 import { FC, memo } from 'react';
+import { useDeleteNewsMutation } from '@/store/api/newsApi';
 //
-import admin from '@/assets/icons/admin1.svg';
-import { INews } from '@/types/newsTypes';
-import { newsItemStyles } from '@/styles/newsItem';
+import ErrorModal from '@/components/ErrorModal/ErrorModal';
+//
 import { convertDate } from '@/utils/additionalFunc/dateConvert';
+import { INews } from '@/types/newsTypes';
+import { CustomError } from '@/types/errors';
+//
+import { admin, deleteLogo } from '@/data/svgStore';
+//
+import { newsItemStyles } from '@/styles/newsItem';
+import Loader from '@/components/Loader/Loader';
 
 export interface INewsItemProps {
   item: INews;
 }
 
 const NewsItem: FC<INewsItemProps> = ({
-  item: { header, text, imgPath, createdAt },
+  item: { header, text, imgPath, createdAt, _id },
 }) => {
+  const isAdmin = true;
+  const [deleteNews, { isLoading, isError, error }] = useDeleteNewsMutation();
   const date = convertDate(createdAt);
   return (
     <div className={newsItemStyles.wrapper}>
+      {isError ? (
+        <ErrorModal
+          isError={isError}
+          error={(error as CustomError)?.data?.msg}
+        />
+      ) : null}
       <div className={newsItemStyles.titleImgContainer}>
         <img className='w-[35px]' src={admin} alt='admin photo' />
         <h2 className={newsItemStyles.title}>{header}</h2>
         <span className={newsItemStyles.data}>{date}</span>
+        <Loader />
+
+        {isAdmin ? (
+          <button
+            onClick={() => deleteNews(_id as string)}
+            className='absolute top-[32px] right-0'
+          >
+            {isLoading ? (
+              <Loader />
+            ) : (
+              <img className='w-[25px]' src={deleteLogo} alt='delete' />
+            )}
+          </button>
+        ) : null}
       </div>
       <p className={newsItemStyles.text}>{text}</p>
       <div className='flex flex-wrap gap-[10px]'>
