@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, useEffect } from 'react';
 import { Routes, Route } from 'react-router-dom';
 //
 import AboutUs from '@/pages/AboutUs/AboutUs';
@@ -17,6 +17,20 @@ import './App.scss';
 
 const App: FC = () => {
   const user = true;
+
+  useEffect(() => {
+    const handleVisibilityChange = () => {
+      if (document.hidden) {
+        document.title = 'Вернись на сайт :)';
+      } else {
+        document.title = 'EMS';
+      }
+    };
+    document.addEventListener('visibilitychange', handleVisibilityChange);
+    return () => {
+      document.removeEventListener('visibilitychange', handleVisibilityChange);
+    };
+  }, []);
 
   return (
     <div className='app relative'>
