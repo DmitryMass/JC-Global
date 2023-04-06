@@ -6,8 +6,7 @@ import { useCreateNewsMutation } from '@/store/api/newsApi';
 
 export const useNewsSubmit = () => {
   const [file, setFile] = useState<File[] | null>(null);
-  const [createNews, { isLoading, isError, isSuccess }] =
-    useCreateNewsMutation();
+  const [createNews, { isLoading, isError, error }] = useCreateNewsMutation();
 
   const handleSubmitNews = async (
     values: INewsFormValues,
@@ -45,5 +44,8 @@ export const useNewsSubmit = () => {
     getRootProps,
     getInputProps,
     isDragActive,
+    isLoading,
+    isError,
+    error,
   };
 };

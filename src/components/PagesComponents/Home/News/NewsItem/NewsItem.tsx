@@ -34,12 +34,10 @@ const NewsItem: FC<INewsItemProps> = ({
         <img className='w-[35px]' src={admin} alt='admin photo' />
         <h2 className={newsItemStyles.title}>{header}</h2>
         <span className={newsItemStyles.data}>{date}</span>
-        <Loader />
-
         {isAdmin ? (
           <button
             onClick={() => deleteNews(_id as string)}
-            className='absolute top-[32px] right-0'
+            className={newsItemStyles.deleteBtn}
           >
             {isLoading ? (
               <Loader />
@@ -49,6 +47,7 @@ const NewsItem: FC<INewsItemProps> = ({
           </button>
         ) : null}
       </div>
+      <h2 className={newsItemStyles.titleMobile}>{header}</h2>
       <p className={newsItemStyles.text}>{text}</p>
       <div className='flex flex-wrap gap-[10px]'>
         {imgPath.length
