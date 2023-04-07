@@ -6,6 +6,7 @@ import Logo from '../Logo/Logo';
 import { headerStyles } from '@/styles/headerStyles';
 import LeftBarMenus from '../LeftBarMenu/LeftBarMenu';
 import { mobileMenu, noPhotoUser } from '@/data/svgStore';
+
 const Header: FC = () => {
   const [menu, setMenu] = useState<boolean>(false);
   return (

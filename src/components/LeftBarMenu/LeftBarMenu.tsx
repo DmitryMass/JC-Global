@@ -5,7 +5,7 @@ import Theme from '../Theme/Theme';
 //
 import { leftBarMenu } from '@/data/leftBarMenuData';
 //
-import { admin, backToScreen } from '@/data/svgStore';
+import { admin, archive, backToScreen } from '@/data/svgStore';
 import { leftBarnMenuStyles } from '@/styles/leftBarMenuStyles';
 import Logo from '../Logo/Logo';
 import { ROUTE } from '@/utils/routes';
@@ -58,9 +58,13 @@ const LeftBarMenus: FC<ILeftBarMenusProps> = ({
             <span className={leftBarnMenuStyles.title}>{title}</span>
           </Link>
         ))}
+        <Link className={leftBarnMenuStyles.link} to={'/archive'}>
+          <img className='w-[40px]' src={archive} alt='archive icon' />
+          <span className={leftBarnMenuStyles.title}>Архів</span>
+        </Link>
         <Link className={leftBarnMenuStyles.link} to={'/admin'}>
           <img className='w-[40px]' src={admin} alt='admin icon' />
-          <span className={leftBarnMenuStyles.title}>Admin</span>
+          <span className={leftBarnMenuStyles.title}>Адмін</span>
         </Link>
       </div>
       <Theme />

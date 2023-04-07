@@ -34,7 +34,12 @@ export const goalsApi = createApi({
     ),
     editGoal: build.mutation<
       { msg: string },
-      { id: string; goalId: string; status?: boolean; newGoal?: string }
+      {
+        id: string;
+        goalId: string;
+        status?: boolean;
+        newGoal?: string;
+      }
     >({
       query: (body) => ({
         url: `/admin/goals/${body.id}`,
@@ -43,8 +48,19 @@ export const goalsApi = createApi({
       }),
       invalidatesTags: [{ type: 'Goals', id: 'goalsList' }],
     }),
+    archivedCompanyGoal: build.mutation<{ msg: string }, string>({
+      query: (id) => ({
+        url: `/admin/goals/${id}`,
+        method: 'PATCH',
+      }),
+      invalidatesTags: [{ type: 'Goals', id: 'goalsList' }],
+    }),
   }),
 });
 
-export const { useGetGoalsQuery, useDeleteGoalMutation, useEditGoalMutation } =
-  goalsApi;
+export const {
+  useGetGoalsQuery,
+  useDeleteGoalMutation,
+  useEditGoalMutation,
+  useArchivedCompanyGoalMutation,
+} = goalsApi;
