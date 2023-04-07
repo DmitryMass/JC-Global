@@ -2,16 +2,24 @@ import { FC, memo, useState } from 'react';
 import { deleteLogo, done, edit, goalMenu, proccess } from '@/data/svgStore';
 import { IGoals } from '@/types/goalsTypes';
 import { goalsStyle } from '@/styles/goalsStyles';
+import {
+  useDeleteGoalMutation,
+  useEditGoalMutation,
+} from '@/store/api/goalsApi';
 
 interface IMonthGoalsItemProps {
   item: IGoals;
+  mainId: string;
 }
 
 const MonthGoalsItem: FC<IMonthGoalsItemProps> = ({
   item: { complete, goal, id },
+  mainId,
 }) => {
-  const [menu, setMenu] = useState<boolean>(false);
   const admin = true;
+  const [menu, setMenu] = useState<boolean>(false);
+  const [deleteGoal, { isLoading, isError, error }] = useDeleteGoalMutation();
+  const [editGoal] = useEditGoalMutation();
 
   return (
     <div
@@ -47,7 +55,16 @@ const MonthGoalsItem: FC<IMonthGoalsItemProps> = ({
                 : `${goalsStyle.adminPanelInvisible}`
             }  `}
           >
-            <button className='w-[25px] '>
+            <button
+              onClick={() =>
+                editGoal({
+                  id: mainId,
+                  goalId: id as string,
+                  status: !complete,
+                })
+              }
+              className='w-[25px] '
+            >
               {complete ? (
                 <img className='max-w-full' src={done} alt='status' />
               ) : (
@@ -57,7 +74,10 @@ const MonthGoalsItem: FC<IMonthGoalsItemProps> = ({
             <button className='w-[25px]'>
               <img src={edit} alt='edit' />
             </button>
-            <button className='w-[25px]'>
+            <button
+              onClick={() => deleteGoal({ id: mainId, goalId: id as string })}
+              className='w-[25px]'
+            >
               <img src={deleteLogo} alt='delete' />
             </button>
           </div>

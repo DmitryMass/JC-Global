@@ -20,7 +20,31 @@ export const goalsApi = createApi({
             ]
           : [{ type: 'Goals', id: 'goalsList' }],
     }),
+    deleteGoal: build.mutation<{ msg: string }, { id: string; goalId: string }>(
+      {
+        query: ({ id, goalId }) => ({
+          url: `/admin/goals/${id}`,
+          method: 'DELETE',
+          headers: {
+            goalid: goalId,
+          },
+        }),
+        invalidatesTags: [{ type: 'Goals', id: 'goalsList' }],
+      }
+    ),
+    editGoal: build.mutation<
+      { msg: string },
+      { id: string; goalId: string; status?: boolean; newGoal?: string }
+    >({
+      query: (body) => ({
+        url: `/admin/goals/${body.id}`,
+        method: 'PUT',
+        body,
+      }),
+      invalidatesTags: [{ type: 'Goals', id: 'goalsList' }],
+    }),
   }),
 });
 
-export const { useGetGoalsQuery } = goalsApi;
+export const { useGetGoalsQuery, useDeleteGoalMutation, useEditGoalMutation } =
+  goalsApi;
