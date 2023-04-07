@@ -36,6 +36,8 @@ module.exports = {
         lightBlue: '#d6e4eb',
         bgLightBlue: '#e8f1f5',
         darkBlue: '#004282',
+        goalBlue: '#004282bd',
+        deepBlue: '#2b3b4e',
       },
       borderColor: {},
       colors: {

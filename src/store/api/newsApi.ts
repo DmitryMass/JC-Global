@@ -12,7 +12,7 @@ export const newsApi = createApi({
       query: () => ({
         url: '/admin/news',
       }),
-      providesTags: (result: any | any) =>
+      providesTags: (result: INews[] | any) =>
         result
           ? [
               ...result.map(({ id }: any) => ({ type: 'News', id })),

@@ -11,6 +11,7 @@ import admin from '@/assets/icons/admin1.svg';
 import about from '@/assets/imgs/aboutUs.jpg';
 import goals from '@/assets/icons/goals.svg';
 import team from '@/assets/icons/team.svg';
+import goalMenu from '@/assets/icons/goal_menu.svg';
 // Theme
 import dark from '@/assets/icons/dark_theme.svg';
 import light from '@/assets/icons/light_theme.svg';
@@ -18,6 +19,9 @@ import light from '@/assets/icons/light_theme.svg';
 import deleteLogo from '@/assets/icons/delete_logo.svg';
 import backToScreen from '@/assets/icons/back_to_screen.svg';
 import noPhotoUser from '@/assets/icons/no_photo_user.svg';
+import proccess from '@/assets/icons/inProccess.svg';
+import done from '@/assets/icons/done_status.svg';
+import archive from '@/assets/icons/archive.svg';
 
 export {
   add,
@@ -35,4 +39,8 @@ export {
   backToScreen,
   mobileMenu,
   noPhotoUser,
+  goalMenu,
+  proccess,
+  done,
+  archive,
 };

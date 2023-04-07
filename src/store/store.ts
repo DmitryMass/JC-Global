@@ -14,6 +14,7 @@ import {
 
 import { setupListeners } from '@reduxjs/toolkit/query';
 import { newsApi } from './api/newsApi';
+import { goalsApi } from './api/goalsApi';
 
 const persistConfig = {
   key: 'root',
@@ -24,6 +25,7 @@ const persistConfig = {
 const reducers = combineReducers({
   persistSlice: persistReducer(persistConfig, persistSliceReducer),
   [newsApi.reducerPath]: newsApi.reducer,
+  [goalsApi.reducerPath]: goalsApi.reducer,
 });
 
 const store = configureStore({
@@ -33,7 +35,7 @@ const store = configureStore({
       serializableCheck: {
         ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
       },
-    }).concat(newsApi.middleware),
+    }).concat(newsApi.middleware, goalsApi.middleware),
 });
 
 setupListeners(store.dispatch);
