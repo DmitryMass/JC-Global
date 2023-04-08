@@ -5,23 +5,25 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation } from 'swiper';
 import 'swiper/css/navigation';
 import { arrow } from '@/data/svgStore';
+import EmployeeItem from './EmployeeItem';
 
 interface ITeamSliderProps {
   swiperInstance: string;
+  employees: any[];
 }
 
-const TeamSlider: FC<ITeamSliderProps> = ({ swiperInstance }) => {
+const TeamSlider: FC<ITeamSliderProps> = ({ swiperInstance, employees }) => {
   const prevClass = `prev-${swiperInstance}`;
   const nextClass = `next--${swiperInstance}`;
   return (
-    <div className='relative flex items-center gap-[5px]'>
+    <div className='relative flex items-center gap-[10px]'>
       <button className={`prev w-[35px] h-[35px] block  ${prevClass}`}>
         <img className='max-w-full' src={arrow} alt='next btn' />
       </button>
       <Swiper
         className={`${swiperInstance} flex-1`}
         slidesPerView={3}
-        spaceBetween={30}
+        spaceBetween={5}
         navigation={{
           prevEl: `.${prevClass}`,
           nextEl: `.${nextClass}`,
@@ -30,10 +32,13 @@ const TeamSlider: FC<ITeamSliderProps> = ({ swiperInstance }) => {
         breakpoints={breakpoints}
         modules={[Navigation]}
       >
-        <SwiperSlide>Slide 1</SwiperSlide>
-        <SwiperSlide>Slide 2</SwiperSlide>
-        <SwiperSlide>Slide 3</SwiperSlide>
-        <SwiperSlide>Slide 4</SwiperSlide>
+        {employees.length
+          ? employees.map((item) => (
+              <SwiperSlide key={item.id}>
+                <EmployeeItem item={item} />
+              </SwiperSlide>
+            ))
+          : null}
       </Swiper>
       <button className={`next w-[35px] h-[35px] block ${nextClass}`}>
         <img className='scale-x-[-1] max-w-full' src={arrow} alt='next btn' />
