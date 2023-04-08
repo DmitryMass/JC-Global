@@ -35,7 +35,7 @@ const GoalsAndArchiveItemTitle: FC<Props> = ({ createdAt, month, _id }) => {
             {isLoading ? (
               <Loader />
             ) : (
-              <img className='w-[30px]' src={archive} alt='archived' />
+              <img className='w-[25px]' src={archive} alt='archived' />
             )}
           </button>
         ) : null}

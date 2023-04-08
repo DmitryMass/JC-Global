@@ -25,7 +25,7 @@ const ArchiveItem: FC<IGoalsItemProps> = ({
         className='block absolute right-[135px] top-[21px] cursor-pointer'
         onClick={handleOpen}
       >
-        <img className='w-[30px]' src={openFolder} alt='open' />
+        <img className='w-[25px]' src={openFolder} alt='open' />
       </span>
       <GoalsAndArchiveItemTitle
         _id={_id as string}
