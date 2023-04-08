@@ -17,7 +17,7 @@ const AboutUs: FC = () => {
           услуг, а также продажи инновационных технологий.
         </p>
         <img
-          className='w-full object-center  object-contain drop-shadow-[0_1px_1px_rgba(0,0,0,1)] mb-[20px] '
+          className='w-full object-center  object-contain drop-shadow-[0_1px_1px_rgba(0,0,0,1)] mb-[20px] rounded-[10px] '
           src='https://images.unsplash.com/photo-1485827404703-89b55fcc595e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTh8fHRlY2hub2xvZ3l8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60'
           alt='test-img'
         />
@@ -31,7 +31,7 @@ const AboutUs: FC = () => {
           бизнес-целей и привести ваш бизнес на новый уровень.
         </p>
         <img
-          className='w-full object-center  object-contain drop-shadow-[0_1px_1px_rgba(0,0,0,1)] mb-[20px] '
+          className='w-full object-center  object-contain drop-shadow-[0_1px_1px_rgba(0,0,0,1)] mb-[20px] rounded-[10px] '
           src='https://images.unsplash.com/photo-1517048676732-d65bc937f952?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80'
           alt='test-img'
         />
@@ -44,7 +44,7 @@ const AboutUs: FC = () => {
         </p>
 
         <img
-          className='w-full object-center  object-contain drop-shadow-[0_1px_1px_rgba(0,0,0,1)] mb-[20px] '
+          className='w-full object-center  object-contain drop-shadow-[0_1px_1px_rgba(0,0,0,1)] mb-[20px] rounded-[10px] '
           src='https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=871&q=80'
           alt='test-img'
         />
