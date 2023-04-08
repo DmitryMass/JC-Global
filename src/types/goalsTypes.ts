@@ -10,3 +10,10 @@ export interface IGoals {
   goal: string;
   complete: boolean;
 }
+
+export interface IEditGoalData {
+  id: string;
+  goalId: string;
+  status?: boolean;
+  newGoal?: string;
+}

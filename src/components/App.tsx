@@ -14,6 +14,7 @@ import {
 } from '@/utils/PROTECTED_ROUTES/protected_routes';
 //
 import './App.scss';
+import Archive from '@/pages/Archive/Archive';
 
 const App: FC = () => {
   const user = true;
@@ -46,6 +47,7 @@ const App: FC = () => {
           <Route path={ROUTE.HOME} element={<HomeNews />} />
           <Route path={ROUTE.ABOUT} element={<AboutUs />} />
           <Route path={ROUTE.GOALS} element={<Goals />} />
+          <Route path={ROUTE.ARCHIVE} element={<Archive />} />
         </Route>
         <Route
           path={ROUTE.LOGIN}

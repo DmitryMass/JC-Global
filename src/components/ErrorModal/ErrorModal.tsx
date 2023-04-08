@@ -16,7 +16,9 @@ const ErrorModal: FC<IErrorModalProps> = ({ isError, error }) => {
   return (
     <div className={errorStyles.fixedWrapper}>
       <div className={errorStyles.contentWrapper}>
-        <span className={errorStyles.errorText}>{error}</span>
+        <span className={errorStyles.errorText}>
+          {error ? error : 'Сервер наразі відключено.'}
+        </span>
         <button
           className={errorStyles.closeBtn}
           onClick={() => setShowModal(false)}

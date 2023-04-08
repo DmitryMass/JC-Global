@@ -1,24 +1,24 @@
 import { FC } from 'react';
-import { useGetGoalsQuery } from '@/store/api/goalsApi';
+import { useGetArchiveCompanyGoalsQuery } from '@/store/api/goalsApi';
 //
 import ContentWrapper from '@/components/ContentWrapper/ContentWrapper';
-import GoalsItem from '@/components/PagesComponents/Goals/GoalsItem';
-import ErrorModal from '@/components/ErrorModal/ErrorModal';
 import GoalsAndArchiveTitle from '@/components/PagesComponents/GoalsAndArchiveTitle';
+import ErrorModal from '@/components/ErrorModal/ErrorModal';
+import ArchiveItem from '@/components/PagesComponents/Archive/ArchiveItem';
 import EmptyData from '@/components/PagesComponents/EmptyData';
 import DoubleSkelet from '@/components/Skeletons/DoubleSkelet';
 //
-import { IGoalsTypes } from '@/types/goalsTypes';
 import { CustomError } from '@/types/errors';
+import { IGoalsTypes } from '@/types/goalsTypes';
 
-const Goals: FC = () => {
+const Archive: FC = () => {
   const {
     data = null,
     isLoading,
     isError,
     error,
     isFetching,
-  } = useGetGoalsQuery();
+  } = useGetArchiveCompanyGoalsQuery();
 
   return (
     <ContentWrapper>
@@ -28,10 +28,10 @@ const Goals: FC = () => {
           error={(error as CustomError)?.data?.msg}
         />
       ) : null}
-      <GoalsAndArchiveTitle title='Цілі компанії' />
+      <GoalsAndArchiveTitle title='Архівні цілі компанії' />
       {data?.length
         ? data.map((item: IGoalsTypes) => (
-            <GoalsItem key={item._id} item={item} />
+            <ArchiveItem item={item} key={item._id} />
           ))
         : null}
       {!data?.length && !isFetching ? (
@@ -42,4 +42,4 @@ const Goals: FC = () => {
   );
 };
 
-export default Goals;
+export default Archive;

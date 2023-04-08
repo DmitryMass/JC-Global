@@ -4,4 +4,5 @@ export const ROUTE = {
   TEAM: '/team',
   GOALS: '/goals',
   LOGIN: '/login',
+  ARCHIVE: '/archive',
 };

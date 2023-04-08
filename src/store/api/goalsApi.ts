@@ -1,11 +1,11 @@
-import { IGoalsTypes } from '@/types/goalsTypes';
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import { IEditGoalData, IGoalsTypes } from '@/types/goalsTypes';
 
 const URL = 'http://localhost:5005';
 
 export const goalsApi = createApi({
   reducerPath: 'goalsApi',
-  tagTypes: ['Goals'],
+  tagTypes: ['Goals', 'Arhive'],
   baseQuery: fetchBaseQuery({ baseUrl: URL }),
   endpoints: (build) => ({
     getGoals: build.query<IGoalsTypes[], void>({
@@ -32,15 +32,7 @@ export const goalsApi = createApi({
         invalidatesTags: [{ type: 'Goals', id: 'goalsList' }],
       }
     ),
-    editGoal: build.mutation<
-      { msg: string },
-      {
-        id: string;
-        goalId: string;
-        status?: boolean;
-        newGoal?: string;
-      }
-    >({
+    editGoal: build.mutation<{ msg: string }, IEditGoalData>({
       query: (body) => ({
         url: `/admin/goals/${body.id}`,
         method: 'PUT',
@@ -53,7 +45,22 @@ export const goalsApi = createApi({
         url: `/admin/goals/${id}`,
         method: 'PATCH',
       }),
-      invalidatesTags: [{ type: 'Goals', id: 'goalsList' }],
+      invalidatesTags: [
+        { type: 'Goals', id: 'goalsList' },
+        { type: 'Arhive', id: 'archiveList' },
+      ],
+    }),
+    getArchiveCompanyGoals: build.query<IGoalsTypes[], void>({
+      query: () => ({
+        url: '/admin/archivedGoals',
+      }),
+      providesTags: (result: IGoalsTypes[] | any) =>
+        result
+          ? [
+              ...result.map(({ id }: any) => ({ type: 'Arhive', id })),
+              { type: 'Arhive', id: 'archiveList' },
+            ]
+          : [{ type: 'Arhive', id: 'archiveList' }],
     }),
   }),
 });
@@ -63,4 +70,5 @@ export const {
   useDeleteGoalMutation,
   useEditGoalMutation,
   useArchivedCompanyGoalMutation,
+  useGetArchiveCompanyGoalsQuery,
 } = goalsApi;

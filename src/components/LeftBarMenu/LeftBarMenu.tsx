@@ -58,11 +58,19 @@ const LeftBarMenus: FC<ILeftBarMenusProps> = ({
             <span className={leftBarnMenuStyles.title}>{title}</span>
           </Link>
         ))}
-        <Link className={leftBarnMenuStyles.link} to={'/archive'}>
+        <Link
+          onClick={setMenu ? () => closeMenuOnLinkClick() : undefined}
+          className={leftBarnMenuStyles.link}
+          to={'/archive'}
+        >
           <img className='w-[40px]' src={archive} alt='archive icon' />
           <span className={leftBarnMenuStyles.title}>Архів</span>
         </Link>
-        <Link className={leftBarnMenuStyles.link} to={'/admin'}>
+        <Link
+          onClick={setMenu ? () => closeMenuOnLinkClick() : undefined}
+          className={leftBarnMenuStyles.link}
+          to={'/admin'}
+        >
           <img className='w-[40px]' src={admin} alt='admin icon' />
           <span className={leftBarnMenuStyles.title}>Адмін</span>
         </Link>

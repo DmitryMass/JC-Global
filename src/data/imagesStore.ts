@@ -1,2 +1,3 @@
 import admin from '@/assets/icons/admin1.svg';
-export { admin };
+import empty from '@/assets/imgs/empty_data.png';
+export { admin, empty };
