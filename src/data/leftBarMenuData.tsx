@@ -9,7 +9,7 @@ export const leftBarMenu = [
   },
   {
     id: '2',
-    link: '/employees',
+    link: '/team',
     title: 'Команда',
     src: `${team}`,
   },

@@ -15,6 +15,7 @@ import {
 //
 import './App.scss';
 import Archive from '@/pages/Archive/Archive';
+import Team from '@/pages/Team/Team';
 
 const App: FC = () => {
   const user = true;
@@ -48,6 +49,7 @@ const App: FC = () => {
           <Route path={ROUTE.ABOUT} element={<AboutUs />} />
           <Route path={ROUTE.GOALS} element={<Goals />} />
           <Route path={ROUTE.ARCHIVE} element={<Archive />} />
+          <Route path={ROUTE.TEAM} element={<Team />} />
         </Route>
         <Route
           path={ROUTE.LOGIN}
