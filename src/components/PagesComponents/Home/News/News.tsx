@@ -2,15 +2,21 @@ import { FC } from 'react';
 import { useGetNewsQuery } from '@/store/api/newsApi';
 //
 import NewsItem from './NewsItem/NewsItem';
+import ErrorModal from '@/components/ErrorModal/ErrorModal';
+import DoubleSkelet from '@/components/Skeletons/DoubleSkelet';
+import EmptyData from '../../EmptyData';
 //
 import { INews } from '@/types/newsTypes';
-import NewsSkeleton from '@/components/Skeletons/NewsSkeleton';
-import ErrorModal from '@/components/ErrorModal/ErrorModal';
 import { CustomError } from '@/types/errors';
-import Loader from '@/components/Loader/Loader';
 
 const News: FC = () => {
-  const { data = [], isLoading, isError, error } = useGetNewsQuery();
+  const {
+    data = [],
+    isLoading,
+    isError,
+    error,
+    isFetching,
+  } = useGetNewsQuery();
   return (
     <>
       {isError ? (
@@ -19,18 +25,13 @@ const News: FC = () => {
           error={(error as CustomError)?.data?.msg}
         />
       ) : null}
-      {isLoading ? (
-        <>
-          <NewsSkeleton />
-          <NewsSkeleton />
-          <NewsSkeleton />
-        </>
+      {isLoading ? <DoubleSkelet /> : null}
+      {data.length
+        ? data.map((item: INews) => <NewsItem item={item} key={item._id} />)
+        : null}
+      {!data?.length && !isFetching ? (
+        <EmptyData title='Новини наразі порожні.' />
       ) : null}
-      {data.length ? (
-        data.map((item: INews) => <NewsItem item={item} key={item._id} />)
-      ) : (
-        <Loader />
-      )}
     </>
   );
 };
