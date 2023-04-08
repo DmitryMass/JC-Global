@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { Link, NavigateFunction, useNavigate } from 'react-router-dom';
+import { NavLink, NavigateFunction, useNavigate } from 'react-router-dom';
 //
 import Theme from '../Theme/Theme';
 //
@@ -48,32 +48,44 @@ const LeftBarMenus: FC<ILeftBarMenusProps> = ({
           <Logo modificator='max-h-[100px] max-w-[250px] w-full mx-auto object-cover' />
         </div>
         {leftBarMenu.map(({ id, link, title, src }) => (
-          <Link
+          <NavLink
             onClick={setMenu ? () => closeMenuOnLinkClick() : undefined}
-            className={leftBarnMenuStyles.link}
             key={id}
             to={link}
+            className={({ isActive }) =>
+              isActive
+                ? ` ${leftBarnMenuStyles.activeClass}`
+                : `${leftBarnMenuStyles.link}`
+            }
           >
             <img className='w-[40px]' src={src} alt='describe icon' />
             <span className={leftBarnMenuStyles.title}>{title}</span>
-          </Link>
+          </NavLink>
         ))}
-        <Link
+        <NavLink
           onClick={setMenu ? () => closeMenuOnLinkClick() : undefined}
-          className={leftBarnMenuStyles.link}
+          className={({ isActive }) =>
+            isActive
+              ? ` ${leftBarnMenuStyles.activeClass}`
+              : `${leftBarnMenuStyles.link}`
+          }
           to={'/archive'}
         >
           <img className='w-[40px]' src={archive} alt='archive icon' />
           <span className={leftBarnMenuStyles.title}>Архів</span>
-        </Link>
-        <Link
+        </NavLink>
+        <NavLink
           onClick={setMenu ? () => closeMenuOnLinkClick() : undefined}
-          className={leftBarnMenuStyles.link}
+          className={({ isActive }) =>
+            isActive
+              ? ` ${leftBarnMenuStyles.activeClass}`
+              : `${leftBarnMenuStyles.link}`
+          }
           to={'/admin'}
         >
           <img className='w-[40px]' src={admin} alt='admin icon' />
           <span className={leftBarnMenuStyles.title}>Адмін</span>
-        </Link>
+        </NavLink>
       </div>
       <Theme />
     </div>
