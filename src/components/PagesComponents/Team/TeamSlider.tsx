@@ -1,12 +1,15 @@
 import { FC } from 'react';
+import { Swiper, SwiperSlide } from 'swiper/react';
+//
+import { Navigation } from 'swiper';
+import EmployeeItem from './EmployeeItem';
+//
+import { arrow } from '@/data/svgStore';
+//
+import 'swiper/css/navigation';
 import '@/styles/scss-styles/team.scss';
 import 'swiper/css';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { Navigation } from 'swiper';
-import 'swiper/css/navigation';
-import { arrow } from '@/data/svgStore';
-import EmployeeItem from './EmployeeItem';
-
+//
 interface ITeamSliderProps {
   swiperInstance: string;
   employees: any[];
@@ -16,8 +19,10 @@ const TeamSlider: FC<ITeamSliderProps> = ({ swiperInstance, employees }) => {
   const prevClass = `prev-${swiperInstance}`;
   const nextClass = `next--${swiperInstance}`;
   return (
-    <div className='relative flex items-center gap-[10px]'>
-      <button className={`prev w-[35px] h-[35px] block  ${prevClass}`}>
+    <div className='relative flex items-center gap-[5px]'>
+      <button
+        className={`prev w-[35px] h-[35px] max-[576px]:w-[25px] max-[576px]:h-[25px] block  ${prevClass}`}
+      >
         <img className='max-w-full' src={arrow} alt='next btn' />
       </button>
       <Swiper
@@ -40,7 +45,9 @@ const TeamSlider: FC<ITeamSliderProps> = ({ swiperInstance, employees }) => {
             ))
           : null}
       </Swiper>
-      <button className={`next w-[35px] h-[35px] block ${nextClass}`}>
+      <button
+        className={`next w-[35px] h-[35px] max-[576px]:w-[25px] max-[576px]:h-[25px] block ${nextClass}`}
+      >
         <img className='scale-x-[-1] max-w-full' src={arrow} alt='next btn' />
       </button>
     </div>
@@ -55,6 +62,9 @@ const breakpoints = {
     slidesPerView: 2,
   },
   768: {
+    slidesPerView: 2,
+  },
+  992: {
     slidesPerView: 3,
   },
 };

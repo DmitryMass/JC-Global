@@ -39,7 +39,7 @@ const Team: FC = () => {
   return (
     <ContentWrapper>
       <h3 className='font-semibold text-l leading-l mb-[20px]'>Наша команда</h3>
-      <div className='bg-white rounded-[6px] py-[20px] px-[5px] mb-[20px] shadow-sm'>
+      <div className='bg-white rounded-[6px] py-[20px] px-[20px] mb-[20px] shadow-sm'>
         <h4 className='mb-[20px] text-classic leading-classic font-semibold'>
           Експерти з продажу
         </h4>

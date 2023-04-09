@@ -13,32 +13,31 @@ import { IGoals } from '@/types/goalsTypes';
 import { CustomError } from '@/types/errors';
 //
 import { goalsStyle } from '@/styles/goalsStyles';
+import { useEditGoals } from '@/hooks/useEditGoal';
+import GoalEditForm from './GoalEditForm';
 
 interface IMonthGoalsItemProps {
   item: IGoals;
   mainId: string;
 }
 
-const MonthGoalsItem: FC<IMonthGoalsItemProps> = ({
-  item: { complete, goal, id },
-  mainId,
-}) => {
-  const admin = true;
-  const [menu, setMenu] = useState<boolean>(false);
+const MonthGoalsItem: FC<IMonthGoalsItemProps> = ({ item, mainId }) => {
+  const { complete, goal, id } = item;
+  const [isEdit, setIsEdit] = useState<boolean>(false);
   const [deleteGoal, { isLoading, isError, error }] = useDeleteGoalMutation();
-  const [
-    editGoal,
-    { isLoading: isEditLoading, isError: isEditError, error: editError },
-  ] = useEditGoalMutation();
+  const {
+    admin,
+    editError,
+    handleEditStatus,
+    isEditError,
+    isEditLoading,
+    menu,
+    setMenu,
+  } = useEditGoals(complete);
 
-  const handleEditStatus = async (mainId: string, id: string) => {
-    await editGoal({
-      id: mainId,
-      goalId: id as string,
-      status: !complete,
-    });
+  const handleEdit = () => {
+    setIsEdit((prev) => !prev);
     setMenu(false);
-    return;
   };
 
   return (
@@ -59,8 +58,12 @@ const MonthGoalsItem: FC<IMonthGoalsItemProps> = ({
           error={(editError as CustomError)?.data?.msg}
         />
       ) : null}
-      <div>
-        <p className={goalsStyle.goalText}>{goal}</p>
+      <div className='w-full'>
+        {isEdit ? (
+          <GoalEditForm setEdit={setIsEdit} item={item} mainId={mainId} />
+        ) : (
+          <p className={goalsStyle.goalText}>{goal}</p>
+        )}
       </div>
       <div>
         {admin ? (
@@ -97,7 +100,7 @@ const MonthGoalsItem: FC<IMonthGoalsItemProps> = ({
                 <img className='max-w-full' src={proccess} alt='status' />
               )}
             </button>
-            <button className='w-[25px]'>
+            <button onClick={handleEdit} className='w-[25px]'>
               <img src={edit} alt='edit' />
             </button>
             <button
