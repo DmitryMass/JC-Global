@@ -1,4 +1,5 @@
 import { FC } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { SwiperSlide } from 'swiper/react';
 
 interface Employee {
@@ -11,8 +12,12 @@ interface IEmployeeItemProps {
 }
 
 const EmployeeItem: FC<IEmployeeItemProps> = ({ item }) => {
+  const navigate = useNavigate();
   return (
-    <div className='w-full min-h-[280px] cursor-pointer flex flex-col'>
+    <div
+      onClick={() => navigate(`/team/${item.id}`)}
+      className='w-full min-h-[280px] cursor-pointer flex flex-col'
+    >
       <div className='w-[110px] h-[110px] mt-[20px] mx-auto bg-black  rounded-full text-white mb-[10px]  '>
         {item.photo}
       </div>

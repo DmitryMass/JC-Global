@@ -10,12 +10,16 @@ import Login from '@/pages/Login/Login';
 import { ROUTE } from '@/utils/routes';
 import {
   ProtectedRoute,
+  ProtectedRouteAdmin,
   ProtectedRouteLogin,
 } from '@/utils/PROTECTED_ROUTES/protected_routes';
 //
 import './App.scss';
 import Archive from '@/pages/Archive/Archive';
 import Team from '@/pages/Team/Team';
+import TeamMember from '@/pages/TeamMember/TeamMember';
+import Admin from '@/pages/Admin/Admin';
+import EmployeeRegister from './PagesComponents/Admin/EmployeeRegister';
 
 const App: FC = () => {
   const user = true;
@@ -50,6 +54,7 @@ const App: FC = () => {
           <Route path={ROUTE.GOALS} element={<Goals />} />
           <Route path={ROUTE.ARCHIVE} element={<Archive />} />
           <Route path={ROUTE.TEAM} element={<Team />} />
+          <Route path={ROUTE.TEAM_MEMBER} element={<TeamMember />} />
         </Route>
         <Route
           path={ROUTE.LOGIN}
@@ -59,6 +64,19 @@ const App: FC = () => {
             </ProtectedRouteLogin>
           }
         ></Route>
+        <Route
+          path={ROUTE.ADMINPANEL}
+          element={
+            <ProtectedRouteAdmin role='admin'>
+              <Admin />
+            </ProtectedRouteAdmin>
+          }
+        >
+          <Route
+            path={ROUTE.ADMIN_EMP_REGISTER}
+            element={<EmployeeRegister />}
+          />
+        </Route>
       </Routes>
     </div>
   );

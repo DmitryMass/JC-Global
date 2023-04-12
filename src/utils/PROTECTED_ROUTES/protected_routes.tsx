@@ -23,3 +23,14 @@ export const ProtectedRouteLogin: FC<{
 
   return <>{children}</>;
 };
+
+export const ProtectedRouteAdmin: FC<{
+  role: string;
+  children: React.ReactNode;
+}> = ({ role, children }) => {
+  if (role !== 'admin') {
+    return <Navigate to={ROUTE.HOME} replace />;
+  }
+
+  return <>{children}</>;
+};

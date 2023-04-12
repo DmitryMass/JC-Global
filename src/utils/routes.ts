@@ -5,4 +5,7 @@ export const ROUTE = {
   GOALS: '/goals',
   LOGIN: '/login',
   ARCHIVE: '/archive',
+  TEAM_MEMBER: '/team/:id',
+  ADMINPANEL: '/admin',
+  ADMIN_EMP_REGISTER: '/admin/empregister',
 };
