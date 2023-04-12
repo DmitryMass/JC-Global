@@ -2,13 +2,13 @@ import { FC } from 'react';
 import { NavLink, NavigateFunction, useNavigate } from 'react-router-dom';
 //
 import Theme from '../Theme/Theme';
+import Logo from '../Logo/Logo';
+//
 //
 import { leftBarMenu } from '@/data/leftBarMenuData';
-//
 import { admin, archive, backToScreen } from '@/data/svgStore';
-import { leftBarnMenuStyles } from '@/styles/leftBarMenuStyles';
-import Logo from '../Logo/Logo';
 import { ROUTE } from '@/utils/routes';
+import { leftBarnMenuStyles } from '@/styles/leftBarMenuStyles';
 
 interface ILeftBarMenusProps {
   wrapperModificator: string;

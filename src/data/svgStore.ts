@@ -13,6 +13,7 @@ import about from '@/assets/imgs/aboutUs.jpg';
 import goals from '@/assets/icons/goals.svg';
 import team from '@/assets/icons/team.svg';
 import goalMenu from '@/assets/icons/goal_menu.svg';
+import mainPage from '@/assets/icons/mainPage.svg';
 // Theme
 import dark from '@/assets/icons/dark_theme.svg';
 import light from '@/assets/icons/light_theme.svg';
@@ -47,4 +48,5 @@ export {
   archive,
   openFolder,
   arrow,
+  mainPage,
 };

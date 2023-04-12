@@ -1,8 +1,8 @@
 export const leftBarnMenuStyles = {
   wrapper:
     'fixed rounded-[4px] bg-lightBlue min-h-leftBarCalc max-w-[120px] w-full px-[1px] pt-[10px] pb-[10px] flex justify-between flex-col max-[768px]:hidden',
-  link: 'flex flex-col items-center gap-[3px] mb-[1px] pt-[10px] pb-[5px] hover:bg-white bg-bgLightBlue',
+  link: 'flex flex-col items-center gap-[3px] mb-[1px] pt-[10px] pb-[5px] hover:bg-white bg-bgLightBlue text-center',
   title: 'font-medium text-m leading-m',
   activeClass:
-    'flex flex-col items-center gap-[3px] mb-[1px] pt-[10px] pb-[5px] bg-white bg-bgLightBlue',
+    'flex flex-col items-center gap-[3px] mb-[1px] pt-[10px] pb-[5px] bg-white bg-bgLightBlue text-center',
 };

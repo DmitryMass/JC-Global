@@ -38,6 +38,7 @@ module.exports = {
         darkBlue: '#004282',
         goalBlue: '#004282bd',
         deepBlue: '#2b3b4e',
+        opacityWhite: '#ffffff80',
       },
       borderColor: {},
       colors: {
