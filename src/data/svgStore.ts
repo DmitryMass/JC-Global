@@ -2,6 +2,8 @@
 import logo from '@/assets/icons/logo.svg';
 import mobileMenu from '@/assets/icons/mobile_menu.svg';
 import logoblack from '@/assets/icons/logo-black.svg';
+import github from '@/assets/icons/github.svg';
+import linkedin from '@/assets/icons/linkedin.svg';
 // Additional
 import add from '@/assets/icons/add.svg';
 import close from '@/assets/icons/remove.svg';
@@ -33,6 +35,8 @@ export {
   add,
   exit,
   admin,
+  github,
+  linkedin,
   logo,
   about,
   goals,
