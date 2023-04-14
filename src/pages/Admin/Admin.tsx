@@ -1,7 +1,8 @@
 import { FC } from 'react';
 import { leftBarnMenuStyles } from '@/styles/leftBarMenuStyles';
-import { Link, NavLink, Outlet } from 'react-router-dom';
+import { Link, NavLink, Outlet, useLocation } from 'react-router-dom';
 import { adminMenu } from '@/data/leftBarMenuData';
+import SecretPanel from '@/components/PagesComponents/Admin/SecretPanel';
 
 const adminStyles = {
   navActive:
@@ -11,6 +12,7 @@ const adminStyles = {
 };
 
 const Admin: FC = () => {
+  const { pathname } = useLocation();
   return (
     <div className='h-full main__container'>
       <div className='mb-[30px] pb-[20px]  border-b-[1px] border-blue-200'>
@@ -37,6 +39,7 @@ const Admin: FC = () => {
           ))}
         </div>
       </div>
+      {pathname === '/admin' ? <SecretPanel /> : null}
       <Outlet />
     </div>
   );

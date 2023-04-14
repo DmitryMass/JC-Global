@@ -4,6 +4,7 @@ import { Formik, Field, FormikHelpers } from 'formik';
 import Logo from '@/components/Logo/Logo';
 import '@/styles/scss-styles/login.scss';
 import ButtonSubmit from '@/components/Buttons/ButtonSubmit/ButtonSubmit';
+import { formStyles } from '@/styles/formsStyles';
 
 interface ILoginValues {
   email: string;
@@ -52,8 +53,13 @@ const Login: FC = () => {
               }) => (
                 <form onSubmit={handleSubmit}>
                   <label className='block mb-[20px]' htmlFor='email'>
+                    {touched.email && errors.email && (
+                      <span className={formStyles.formError}>
+                        {errors.email}
+                      </span>
+                    )}
                     <Field
-                      className='outline-none border-[2px] border-blue-600 border-opacity-20 rounded-[4px] w-full p-[10px] font-semibold text-m leading-m bg-blue-50 placeholder:text-blue-400 placeholder:font-medium placeholder:opacity-70'
+                      className={formStyles.blueInput}
                       id='email'
                       onChange={handleChange}
                       onBlur={handleBlur}
@@ -64,8 +70,13 @@ const Login: FC = () => {
                     />
                   </label>
                   <label className='block mb-[20px]' htmlFor='password'>
+                    {touched.password && errors.password && (
+                      <span className={formStyles.formError}>
+                        {errors.password}
+                      </span>
+                    )}
                     <Field
-                      className='outline-none border-[2px] border-blue-600 border-opacity-20 rounded-[4px] w-full p-[10px] font-semibold text-m leading-m bg-blue-50 placeholder:text-blue-400 placeholder:font-medium placeholder:opacity-70'
+                      className={formStyles.blueInput}
                       id='password'
                       onChange={handleChange}
                       onBlur={handleBlur}

@@ -3,12 +3,6 @@ export const homeNewsStyles = {
   inputWrapper: 'flex justify-start items-start gap-[20px] max-[576px]:block',
   imgWrapper: 'flex items-center max-[576px]:mb-[20px] gap-[10px]',
   adminSpan: 'max-[576px]:block hidden text-m leading-m font-semibold',
-  errorSpan:
-    'text-sm leading-sm font-medium absolute top-[-18px] left-[2px] text-red-700',
-  textarea:
-    'w-full outline-none border-[1px] border-opacity-10 border-black p-[5px] rounded-[4px] text-m leading-m font-medium h-[60px] max-h-[135px] resize-y',
-  input:
-    'w-full outline-none border-[1px] border-opacity-10 border-black p-[5px] rounded-[4px] text-sm leading-sm font-medium mb-[20px]',
   dropzoneWrapper: 'flex justify-end gap-[15px] items-center',
   fileNameSpan:
     'block font-semibold text-sm max-w-[150px] text-ellipsis grow overflow-hidden whitespace-nowrap',

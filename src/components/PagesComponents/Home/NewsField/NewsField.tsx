@@ -10,6 +10,7 @@ import { add, admin } from '@/data/svgStore';
 import { CustomError } from '@/types/errors';
 import { homeNewsStyles } from '@/styles/homeNewsStyles';
 import { newsValidation } from '@/utils/validationSchemas/newsValidation';
+import { formStyles } from '@/styles/formsStyles';
 
 const NewsField: FC = () => {
   const {
@@ -53,12 +54,12 @@ const NewsField: FC = () => {
               <div className='w-full'>
                 <label className='block w-full relative' htmlFor='header'>
                   {touched.header && errors.header && (
-                    <span className={homeNewsStyles.errorSpan}>
+                    <span className={formStyles.formError}>
                       {errors.header}
                     </span>
                   )}
                   <Field
-                    className={homeNewsStyles.input}
+                    className={formStyles.input}
                     id='header'
                     onChange={handleChange}
                     onBlur={handleBlur}
@@ -69,12 +70,10 @@ const NewsField: FC = () => {
                 </label>
                 <label className='block w-full relative' htmlFor='text'>
                   {touched.text && errors.text && (
-                    <span className={homeNewsStyles.errorSpan}>
-                      {errors.text}
-                    </span>
+                    <span className={formStyles.formError}>{errors.text}</span>
                   )}
                   <Field
-                    className={homeNewsStyles.textarea}
+                    className={formStyles.textarea}
                     id='text'
                     onChange={handleChange}
                     onBlur={handleBlur}

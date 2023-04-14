@@ -9,20 +9,20 @@ import { arrow } from '@/data/svgStore';
 import 'swiper/css/navigation';
 import '@/styles/scss-styles/team.scss';
 import 'swiper/css';
+import { IEmployee } from '@/types/employee';
+import { teamStyles } from '@/styles/teamStyles';
 //
 interface ITeamSliderProps {
   swiperInstance: string;
-  employees: any[];
+  employees: IEmployee[];
 }
 
 const TeamSlider: FC<ITeamSliderProps> = ({ swiperInstance, employees }) => {
   const prevClass = `prev-${swiperInstance}`;
   const nextClass = `next--${swiperInstance}`;
   return (
-    <div className='relative flex items-center gap-[5px]'>
-      <button
-        className={`prev w-[35px] h-[35px] max-[576px]:w-[25px] max-[576px]:h-[25px] block  ${prevClass}`}
-      >
+    <div className={teamStyles.teamSlider}>
+      <button className={`${teamStyles.teamSliderPrevBtn}  ${prevClass}`}>
         <img className='max-w-full' src={arrow} alt='next btn' />
       </button>
       <Swiper
@@ -38,16 +38,14 @@ const TeamSlider: FC<ITeamSliderProps> = ({ swiperInstance, employees }) => {
         modules={[Navigation]}
       >
         {employees.length
-          ? employees.map((item) => (
-              <SwiperSlide key={item.id}>
+          ? employees.map((item: IEmployee) => (
+              <SwiperSlide key={item._id}>
                 <EmployeeItem item={item} />
               </SwiperSlide>
             ))
           : null}
       </Swiper>
-      <button
-        className={`next w-[35px] h-[35px] max-[576px]:w-[25px] max-[576px]:h-[25px] block ${nextClass}`}
-      >
+      <button className={`${teamStyles.teamSliderNextBtn} ${nextClass}`}>
         <img className='scale-x-[-1] max-w-full' src={arrow} alt='next btn' />
       </button>
     </div>

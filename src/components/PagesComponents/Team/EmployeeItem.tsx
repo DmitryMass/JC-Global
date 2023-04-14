@@ -1,31 +1,37 @@
 import { FC } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { SwiperSlide } from 'swiper/react';
+import { IEmployee } from '@/types/employee';
+import { admin, employeeDetails } from '@/data/svgStore';
+import { teamStyles } from '@/styles/teamStyles';
 
-interface Employee {
-  id: number;
-  name: string;
-  photo: string;
-}
 interface IEmployeeItemProps {
-  item: Employee;
+  item: IEmployee;
 }
 
 const EmployeeItem: FC<IEmployeeItemProps> = ({ item }) => {
   const navigate = useNavigate();
   return (
-    <div
-      onClick={() => navigate(`/team/${item.id}`)}
-      className='w-full min-h-[280px] cursor-pointer flex flex-col'
-    >
-      <div className='w-[110px] h-[110px] mt-[20px] mx-auto bg-black  rounded-full text-white mb-[10px]  '>
-        {item.photo}
+    <div className={teamStyles.teamSliderItem}>
+      <button
+        onClick={() => navigate(`/team/${item._id}`)}
+        className={teamStyles.teamSliderItemDetailsBtn}
+      >
+        <img className='max-w-full' src={employeeDetails} alt='details' />
+      </button>
+      <div className={teamStyles.teamSliderItemBox}>
+        <img
+          className={teamStyles.teamSliderItemImg}
+          src={
+            item.photoPath
+              ? `http://localhost:5005/assets/${item.photoPath}`
+              : admin
+          }
+          alt='user photo'
+        />
       </div>
-      <div className='text-center min-h-[100px] flex-1 flex flex-col justify-center gap-[5px]'>
-        <p className='text-white text-sm leading-sm font-medium'>
-          Замісник Директора
-        </p>
-        <p className='text-white text-sm leading-sm font-medium'>{item.name}</p>
+      <div className={teamStyles.teamSliderItemBoxInfo}>
+        <p className={teamStyles.teamSliderItemBoxTitle}>{item.jobTitle}</p>
+        <p className={teamStyles.teamSliderItemBoxFullName}>{item.fullName}</p>
       </div>
     </div>
   );

@@ -4,16 +4,21 @@
   position: inherit !important;
 }
 .slide {
-  min-height: 300px;
+  min-height: 200px;
   height: 100%;
   max-width: 235px;
   width: 100%;
   margin: 0 auto;
 }
 .swiper-slide {
-  min-height: 280px;
+  min-height: 180px;
   height: 100%;
   border-radius: 6px;
-  background-color: #273b7a;
+  background: linear-gradient(
+    169deg,
+    rgb(255 98 98) 6%,
+    rgb(39 59 122) 55%,
+    rgb(18 17 73) 80%
+  );
   padding: 10px;
 }

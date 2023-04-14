@@ -1,14 +1,40 @@
 import { FC } from 'react';
-import ContentWrapper from '@/components/ContentWrapper/ContentWrapper';
 import { useParams } from 'react-router-dom';
+import { useGetEmployeeQuery } from '@/store/api/employeesApi';
+//
+import ContentWrapper from '@/components/ContentWrapper/ContentWrapper';
 import MemberTitle from '@/components/PagesComponents/Team/MemberTitle';
+import Loader from '@/components/Loader/Loader';
+import ErrorModal from '@/components/ErrorModal/ErrorModal';
+import DoubleSkelet from '@/components/Skeletons/DoubleSkelet';
+//
+import { CustomError } from '@/types/errors';
+import TeamMemberInfo from './TeamMemberInfo';
 
 const TeamMember: FC = () => {
   const { id } = useParams();
+  const { isLoading, isError, error, data } = useGetEmployeeQuery(
+    id as string,
+    {
+      skip: !id,
+    }
+  );
+
   return (
     <ContentWrapper>
-      <MemberTitle />
-      <div className='bg-white rounded-[6px] p-[20px]'>TeamMember {id}</div>
+      {isError ? (
+        <ErrorModal
+          isError={isError}
+          error={(error as CustomError)?.data?.msg}
+        />
+      ) : null}
+      <MemberTitle name={data ? data.fullName : <Loader />} />
+      {isLoading ? <DoubleSkelet /> : null}
+      {data ? (
+        <>
+          <TeamMemberInfo data={data} />
+        </>
+      ) : null}
     </ContentWrapper>
   );
 };
