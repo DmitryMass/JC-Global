@@ -1,16 +1,16 @@
 import { FC, memo } from 'react';
 import { useDeleteNewsMutation } from '@/store/api/newsApi';
+import useTypedSelector from '@/store/storeHooks/useTypedSelector';
 //
 import ErrorModal from '@/components/ErrorModal/ErrorModal';
+import Loader from '@/components/Loader/Loader';
 //
 import { convertDate } from '@/utils/additionalFunc/dateConvert';
 import { INews } from '@/types/newsTypes';
 import { CustomError } from '@/types/errors';
-//
 import { admin, deleteLogo, edit } from '@/data/svgStore';
 //
 import { newsItemStyles } from '@/styles/newsItem';
-import Loader from '@/components/Loader/Loader';
 
 export interface INewsItemProps {
   item: INews;
@@ -19,7 +19,7 @@ export interface INewsItemProps {
 const NewsItem: FC<INewsItemProps> = ({
   item: { header, text, imgPath, createdAt, _id },
 }) => {
-  const isAdmin = true;
+  const user = useTypedSelector((state) => state.persistSlice.authData);
   const [deleteNews, { isLoading, isError, error }] = useDeleteNewsMutation();
   const date = convertDate(createdAt);
   return (
@@ -34,7 +34,7 @@ const NewsItem: FC<INewsItemProps> = ({
         <img className='w-[40px]' src={admin} alt='admin photo' />
         <h2 className={newsItemStyles.title}>{header}</h2>
         <span className={newsItemStyles.data}>{date}</span>
-        {isAdmin ? (
+        {user?.role === 'admin' ? (
           <div className={newsItemStyles.adminBtns}>
             <button onClick={() => {}}>
               <img className='w-[25px]' src={edit} alt='edit' />

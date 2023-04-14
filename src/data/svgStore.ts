@@ -7,6 +7,7 @@ import add from '@/assets/icons/add.svg';
 import close from '@/assets/icons/remove.svg';
 import edit from '@/assets/icons/edit_logo.svg';
 import arrow from '@/assets/icons/arrow.svg';
+import exit from '@/assets/icons/exit.svg';
 // Menu
 import admin from '@/assets/icons/admin1.svg';
 import about from '@/assets/imgs/aboutUs.jpg';
@@ -30,6 +31,7 @@ import employeeDetails from '@/assets/icons/employee_details.svg';
 
 export {
   add,
+  exit,
   admin,
   logo,
   about,

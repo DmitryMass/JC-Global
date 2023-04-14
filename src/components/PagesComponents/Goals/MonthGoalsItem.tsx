@@ -26,7 +26,7 @@ const MonthGoalsItem: FC<IMonthGoalsItemProps> = ({ item, mainId }) => {
   const [isEdit, setIsEdit] = useState<boolean>(false);
   const [deleteGoal, { isLoading, isError, error }] = useDeleteGoalMutation();
   const {
-    admin,
+    user,
     editError,
     handleEditStatus,
     isEditError,
@@ -66,7 +66,7 @@ const MonthGoalsItem: FC<IMonthGoalsItemProps> = ({ item, mainId }) => {
         )}
       </div>
       <div>
-        {admin ? (
+        {user?.role === 'admin' ? (
           <button
             onClick={() => setMenu((prev) => !prev)}
             className='block w-[50px] mt-[-10px]'
@@ -82,7 +82,7 @@ const MonthGoalsItem: FC<IMonthGoalsItemProps> = ({ item, mainId }) => {
             )}
           </div>
         )}
-        {admin ? (
+        {user?.role === 'admin' ? (
           <div
             className={`${goalsStyle.adminPanelWrapper} ${
               menu

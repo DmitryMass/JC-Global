@@ -1,9 +1,11 @@
 import { FC, memo, useState } from 'react';
+import useTypedSelector from '@/store/storeHooks/useTypedSelector';
+//
+import GoalsAndArchiveItemTitle from '../GoalsAndArchiveItemTitle';
+import ArchiveGoalItem from './ArchiveGoalItem';
 //
 import { IGoalsTypes } from '@/types/goalsTypes';
 import { goalsStyle } from '@/styles/goalsStyles';
-import GoalsAndArchiveItemTitle from '../GoalsAndArchiveItemTitle';
-import ArchiveGoalItem from './ArchiveGoalItem';
 import { IGoals } from '@/types/goalsTypes';
 import { openFolder } from '@/data/svgStore';
 
@@ -13,6 +15,7 @@ interface IGoalsItemProps {
 const ArchiveItem: FC<IGoalsItemProps> = ({
   item: { createdAt, goals, month, _id },
 }) => {
+  const user = useTypedSelector((state) => state.persistSlice.authData);
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
   const handleOpen = () => {
@@ -22,7 +25,11 @@ const ArchiveItem: FC<IGoalsItemProps> = ({
   return (
     <div className={`${goalsStyle.goalsItemWrapper} relative`}>
       <span
-        className='block absolute right-[135px] top-[21px] cursor-pointer'
+        className={`block absolute ${
+          user?.role !== 'admin'
+            ? 'right-[90px] top-[18px]'
+            : 'right-[135px] top-[21px]'
+        }  cursor-pointer`}
         onClick={handleOpen}
       >
         <img className='w-[25px]' src={openFolder} alt='open' />

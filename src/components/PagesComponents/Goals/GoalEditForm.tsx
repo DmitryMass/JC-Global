@@ -9,6 +9,7 @@ import { IGoals } from '@/types/goalsTypes';
 import { homeNewsStyles } from '@/styles/homeNewsStyles';
 import ErrorModal from '@/components/ErrorModal/ErrorModal';
 import { CustomError } from '@/types/errors';
+import { formStyles } from '@/styles/formsStyles';
 
 interface IGoalEditForm {
   item: IGoals;
@@ -71,12 +72,10 @@ const GoalEditForm: FC<IGoalEditForm> = ({
             <div className='w-full'>
               <label className='block w-full relative' htmlFor='goal'>
                 {touched.goal && errors.goal && (
-                  <span className={homeNewsStyles.errorSpan}>
-                    {errors.goal}
-                  </span>
+                  <span className={formStyles.formError}>{errors.goal}</span>
                 )}
                 <Field
-                  className={homeNewsStyles.textarea}
+                  className={formStyles.textarea}
                   id='goal'
                   onChange={handleChange}
                   onBlur={handleBlur}

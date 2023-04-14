@@ -6,11 +6,14 @@ import Logo from '../Logo/Logo';
 //
 import { headerStyles } from '@/styles/headerStyles';
 import LeftBarMenus from '../LeftBarMenu/LeftBarMenu';
-import { mobileMenu } from '@/data/svgStore';
+import { exit, mobileMenu } from '@/data/svgStore';
+import { useDispatch } from 'react-redux';
+import useActions from '@/store/storeHooks/useActions';
 
 const Header: FC = () => {
   const [menu, setMenu] = useState<boolean>(false);
-  const user = useTypedSelector((state) => state.persistSlice.authData);
+  const dispatch = useDispatch();
+  const { logOut } = useActions();
 
   return (
     <header className={headerStyles.header}>
@@ -20,9 +23,9 @@ const Header: FC = () => {
           modificator='w-[120px] h-[60px] min-[768px]:ml-[20px]'
         />
         <div className='flex items-center gap-[20px]'>
-          <Link className='block text-white w-[35px]' to={'/account'}>
-            {user?.email}
-          </Link>
+          <button onClick={() => dispatch(logOut())}>
+            <img className='w-[30px] h-[30px]' src={exit} alt='exit' />
+          </button>
           <div className='relative min-[768px]:hidden'>
             <div onClick={() => setMenu(true)}>
               <img className='w-[30px]' src={mobileMenu} alt='mobileMenu' />

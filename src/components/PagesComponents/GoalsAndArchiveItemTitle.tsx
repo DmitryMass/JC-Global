@@ -1,5 +1,6 @@
 import { FC, memo } from 'react';
 import { useArchivedCompanyGoalMutation } from '@/store/api/goalsApi';
+import useTypedSelector from '@/store/storeHooks/useTypedSelector';
 //
 import Loader from '../Loader/Loader';
 import ErrorModal from '../ErrorModal/ErrorModal';
@@ -18,8 +19,10 @@ interface Props {
 const GoalsAndArchiveItemTitle: FC<Props> = ({ createdAt, month, _id }) => {
   const [archivedGoals, { isLoading, isError, error }] =
     useArchivedCompanyGoalMutation();
+  const user = useTypedSelector((state) => state.persistSlice.authData);
+
   const created = convertDate(createdAt);
-  const admin = true;
+
   return (
     <div className='flex justify-between items-center mb-[10px]'>
       {isError ? (
@@ -29,8 +32,8 @@ const GoalsAndArchiveItemTitle: FC<Props> = ({ createdAt, month, _id }) => {
         />
       ) : null}
       <h3 className={goalsStyle.month}>{month}</h3>
-      <div className='flex items-center gap-[10px]'>
-        {admin ? (
+      <div className='flex items-center gap-[17px]'>
+        {user?.role === 'admin' ? (
           <button onClick={() => archivedGoals(_id as string)}>
             {isLoading ? (
               <Loader />

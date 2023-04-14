@@ -1,15 +1,14 @@
 import { FC } from 'react';
 import { NavLink, NavigateFunction, useNavigate } from 'react-router-dom';
+import useTypedSelector from '@/store/storeHooks/useTypedSelector';
 //
 import Theme from '../Theme/Theme';
 import Logo from '../Logo/Logo';
 //
-//
 import { leftBarMenu } from '@/data/leftBarMenuData';
-import { admin, archive, backToScreen } from '@/data/svgStore';
+import { admin, archive, backToScreen, noPhotoUser } from '@/data/svgStore';
 import { ROUTE } from '@/utils/routes';
 import { leftBarnMenuStyles } from '@/styles/leftBarMenuStyles';
-import useTypedSelector from '@/store/storeHooks/useTypedSelector';
 
 interface ILeftBarMenusProps {
   wrapperModificator: string;
@@ -90,7 +89,24 @@ const LeftBarMenus: FC<ILeftBarMenusProps> = ({
             <img className='w-[40px]' src={admin} alt='admin icon' />
             <span className={leftBarnMenuStyles.title}>Адмін</span>
           </NavLink>
-        ) : null}
+        ) : (
+          <NavLink
+            onClick={setMenu ? () => closeMenuOnLinkClick() : undefined}
+            className={({ isActive }) =>
+              isActive
+                ? ` ${leftBarnMenuStyles.activeClass}`
+                : `${leftBarnMenuStyles.link}`
+            }
+            to={'/account'}
+          >
+            <img
+              className='w-[40px]'
+              src={noPhotoUser}
+              alt='employee settings'
+            />
+            <span className={leftBarnMenuStyles.title}>Особистий кабінет</span>
+          </NavLink>
+        )}
       </div>
       <Theme />
     </div>

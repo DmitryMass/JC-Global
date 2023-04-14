@@ -1,8 +1,10 @@
 import { useEditGoalMutation } from '@/store/api/goalsApi';
+import useTypedSelector from '@/store/storeHooks/useTypedSelector';
 import { useState } from 'react';
 
 export const useEditGoals = (complete?: boolean) => {
-  const admin = true;
+  const user = useTypedSelector((state) => state.persistSlice.authData);
+
   const [menu, setMenu] = useState<boolean>(false);
   const [
     editGoal,
@@ -38,7 +40,7 @@ export const useEditGoals = (complete?: boolean) => {
   };
 
   return {
-    admin,
+    user,
     menu,
     setMenu,
     isEditLoading,

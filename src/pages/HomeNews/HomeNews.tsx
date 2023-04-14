@@ -11,9 +11,11 @@ const HomeNews: FC = () => {
   const user = useTypedSelector((state) => state.persistSlice.authData);
   return (
     <ContentWrapper>
-      <div className={homeNewsStyles.wrapper}>
-        {user?.role === 'admin' ? <NewsField /> : null}
-      </div>
+      {user?.role === 'admin' ? (
+        <div className={homeNewsStyles.wrapper}>
+          <NewsField />
+        </div>
+      ) : null}
       <News />
     </ContentWrapper>
   );
