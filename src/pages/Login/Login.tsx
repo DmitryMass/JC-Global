@@ -5,6 +5,10 @@ import Logo from '@/components/Logo/Logo';
 import '@/styles/scss-styles/login.scss';
 import ButtonSubmit from '@/components/Buttons/ButtonSubmit/ButtonSubmit';
 import { formStyles } from '@/styles/formsStyles';
+import { useLoginMutation } from '@/store/api/auth';
+import Loader from '@/components/Loader/Loader';
+import { useDispatch } from 'react-redux';
+import useActions from '@/store/storeHooks/useActions';
 
 interface ILoginValues {
   email: string;
@@ -13,13 +17,27 @@ interface ILoginValues {
 
 const Login: FC = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [login, { isLoading, isError, error }] = useLoginMutation();
+  const dispatch = useDispatch();
+  const { setAuthToken } = useActions();
 
-  const handleSubmit = (
+  const handleSubmit = async (
     values: ILoginValues,
     actions: FormikHelpers<ILoginValues>
   ) => {
-    console.log(values);
+    const body = new FormData();
+    Object.entries(values).forEach((item) => {
+      body.append(item[0], item[1]);
+    });
     actions.resetForm();
+    try {
+      const loginData = await login(body).unwrap();
+      if (loginData.userData) {
+        dispatch(setAuthToken(loginData.userData));
+      }
+    } catch (err) {
+      console.error(err);
+    }
   };
 
   useEffect(() => {
@@ -87,10 +105,10 @@ const Login: FC = () => {
                     />
                   </label>
                   <ButtonSubmit modificator='block w-full bg-blue-700 shadow-sm shadow-blue-400 hover:shadow-md hover:shadow-blue-300 transition-all duration-150 p-[10px] rounded-[4px] text-white text-l leading-l mb-[20px]'>
-                    Login
+                    {isLoading ? <Loader /> : 'Увійти'}
                   </ButtonSubmit>
                   <span className='block border-b-[1px] border-blue-200 pb-[70px] text-right text-sm leading-sm text-blue-600'>
-                    Reset password
+                    Скинути пароль
                   </span>
                 </form>
               )}

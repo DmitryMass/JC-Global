@@ -10,6 +10,8 @@ import DoubleSkelet from '@/components/Skeletons/DoubleSkelet';
 //
 import { CustomError } from '@/types/errors';
 import TeamMemberInfo from './TeamMemberInfo';
+import TeamMemberPlans from './TeamMemberPlans';
+import TeamMemberSchedule from './TeamMemberSchedule';
 
 const TeamMember: FC = () => {
   const { id } = useParams();
@@ -33,6 +35,8 @@ const TeamMember: FC = () => {
       {data ? (
         <>
           <TeamMemberInfo data={data} />
+          <TeamMemberPlans />
+          <TeamMemberSchedule />
         </>
       ) : null}
     </ContentWrapper>

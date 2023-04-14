@@ -9,6 +9,7 @@ import { leftBarMenu } from '@/data/leftBarMenuData';
 import { admin, archive, backToScreen } from '@/data/svgStore';
 import { ROUTE } from '@/utils/routes';
 import { leftBarnMenuStyles } from '@/styles/leftBarMenuStyles';
+import useTypedSelector from '@/store/storeHooks/useTypedSelector';
 
 interface ILeftBarMenusProps {
   wrapperModificator: string;
@@ -19,6 +20,8 @@ const LeftBarMenus: FC<ILeftBarMenusProps> = ({
   wrapperModificator,
   setMenu,
 }) => {
+  const user = useTypedSelector((state) => state.persistSlice.authData);
+
   const navigate = useNavigate();
   const closeMenuOnLinkClick = (navigate?: NavigateFunction) => {
     if (setMenu && navigate) {
@@ -74,18 +77,20 @@ const LeftBarMenus: FC<ILeftBarMenusProps> = ({
           <img className='w-[40px]' src={archive} alt='archive icon' />
           <span className={leftBarnMenuStyles.title}>Архів</span>
         </NavLink>
-        <NavLink
-          onClick={setMenu ? () => closeMenuOnLinkClick() : undefined}
-          className={({ isActive }) =>
-            isActive
-              ? ` ${leftBarnMenuStyles.activeClass}`
-              : `${leftBarnMenuStyles.link}`
-          }
-          to={'/admin'}
-        >
-          <img className='w-[40px]' src={admin} alt='admin icon' />
-          <span className={leftBarnMenuStyles.title}>Адмін</span>
-        </NavLink>
+        {user?.role === 'admin' ? (
+          <NavLink
+            onClick={setMenu ? () => closeMenuOnLinkClick() : undefined}
+            className={({ isActive }) =>
+              isActive
+                ? ` ${leftBarnMenuStyles.activeClass}`
+                : `${leftBarnMenuStyles.link}`
+            }
+            to={'/admin'}
+          >
+            <img className='w-[40px]' src={admin} alt='admin icon' />
+            <span className={leftBarnMenuStyles.title}>Адмін</span>
+          </NavLink>
+        ) : null}
       </div>
       <Theme />
     </div>

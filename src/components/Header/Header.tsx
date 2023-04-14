@@ -1,14 +1,17 @@
 import { FC, useState } from 'react';
 import { Link } from 'react-router-dom';
+import useTypedSelector from '@/store/storeHooks/useTypedSelector';
 //
 import Logo from '../Logo/Logo';
 //
 import { headerStyles } from '@/styles/headerStyles';
 import LeftBarMenus from '../LeftBarMenu/LeftBarMenu';
-import { mobileMenu, noPhotoUser } from '@/data/svgStore';
+import { mobileMenu } from '@/data/svgStore';
 
 const Header: FC = () => {
   const [menu, setMenu] = useState<boolean>(false);
+  const user = useTypedSelector((state) => state.persistSlice.authData);
+
   return (
     <header className={headerStyles.header}>
       <div className={`${headerStyles.wrapper} header__container`}>
@@ -18,7 +21,7 @@ const Header: FC = () => {
         />
         <div className='flex items-center gap-[20px]'>
           <Link className='block text-white w-[35px]' to={'/account'}>
-            <img src={noPhotoUser} alt='user photo' />
+            {user?.email}
           </Link>
           <div className='relative min-[768px]:hidden'>
             <div onClick={() => setMenu(true)}>

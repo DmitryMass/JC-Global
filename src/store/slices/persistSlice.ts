@@ -1,22 +1,23 @@
+import { ILogin } from '@/types/authTypes';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 interface IInitialState {
-  authToken: string | null;
+  authData: ILogin | null;
 }
 
 const initialState: IInitialState = {
-  authToken: null,
+  authData: null,
 };
 
 export const persistSlice = createSlice({
   name: 'persistSlice',
   initialState,
   reducers: {
-    setAuthToken: (state, { payload }: PayloadAction<string>) => {
-      state.authToken = payload;
+    setAuthToken: (state, { payload }: PayloadAction<ILogin>) => {
+      state.authData = payload;
     },
     logOut: (state) => {
-      state.authToken = null;
+      state.authData = null;
     },
   },
 });

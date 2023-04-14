@@ -44,8 +44,8 @@ const Team: FC = () => {
             <h4 className={teamStyles.teamBoxTitle}>Бухгалтери</h4>
             <TeamSlider
               employees={data.accountants}
-              key='mySwiper2'
-              swiperInstance='mySwiper2'
+              key='mySwiper3'
+              swiperInstance='mySwiper3'
             />
           </div>
         </>

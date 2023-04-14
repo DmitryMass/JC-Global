@@ -1,11 +1,17 @@
 import { FC, useEffect } from 'react';
 import { Routes, Route } from 'react-router-dom';
+import useTypedSelector from '@/store/storeHooks/useTypedSelector';
 //
 import AboutUs from '@/pages/AboutUs/AboutUs';
 import Goals from '@/pages/Goals/Goals';
 import Home from '@/pages/Home/Home';
 import HomeNews from '@/pages/HomeNews/HomeNews';
 import Login from '@/pages/Login/Login';
+import Archive from '@/pages/Archive/Archive';
+import Team from '@/pages/Team/Team';
+import TeamMember from '@/pages/TeamMember/TeamMember';
+import Admin from '@/pages/Admin/Admin';
+import EmployeeRegister from './PagesComponents/Admin/EmployeeRegister';
 //
 import { ROUTE } from '@/utils/routes';
 import {
@@ -15,14 +21,9 @@ import {
 } from '@/utils/PROTECTED_ROUTES/protected_routes';
 //
 import './App.scss';
-import Archive from '@/pages/Archive/Archive';
-import Team from '@/pages/Team/Team';
-import TeamMember from '@/pages/TeamMember/TeamMember';
-import Admin from '@/pages/Admin/Admin';
-import EmployeeRegister from './PagesComponents/Admin/EmployeeRegister';
 
 const App: FC = () => {
-  const user = true;
+  const user = useTypedSelector((state) => state.persistSlice.authData);
 
   useEffect(() => {
     const handleVisibilityChange = () => {
@@ -44,7 +45,7 @@ const App: FC = () => {
         <Route
           path={ROUTE.HOME}
           element={
-            <ProtectedRoute user={user}>
+            <ProtectedRoute user={user ? true : false}>
               <Home />
             </ProtectedRoute>
           }
@@ -59,7 +60,7 @@ const App: FC = () => {
         <Route
           path={ROUTE.LOGIN}
           element={
-            <ProtectedRouteLogin user={user}>
+            <ProtectedRouteLogin user={user ? true : false}>
               <Login />
             </ProtectedRouteLogin>
           }
@@ -67,7 +68,7 @@ const App: FC = () => {
         <Route
           path={ROUTE.ADMINPANEL}
           element={
-            <ProtectedRouteAdmin role='admin'>
+            <ProtectedRouteAdmin role={user?.role as string}>
               <Admin />
             </ProtectedRouteAdmin>
           }

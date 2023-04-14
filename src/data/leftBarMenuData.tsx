@@ -4,18 +4,24 @@ import { about, admin, goals, mainPage, team } from './svgStore';
 export const leftBarMenu = [
   {
     id: '1',
+    link: '/',
+    title: 'Головна',
+    src: `${admin}`,
+  },
+  {
+    id: '2',
     link: '/about',
     title: 'Ми',
     src: `${about}`,
   },
   {
-    id: '2',
+    id: '3',
     link: '/team',
     title: 'Команда',
     src: `${team}`,
   },
   {
-    id: '3',
+    id: '4',
     link: '/goals',
     title: 'Цілі',
     src: `${goals}`,

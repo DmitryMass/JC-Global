@@ -1,3 +1,4 @@
+import { ILoginData } from '@/types/authTypes';
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
 const URL = 'http://localhost:5005';
@@ -13,7 +14,14 @@ export const authApi = createApi({
         body,
       }),
     }),
+    login: build.mutation<ILoginData, FormData>({
+      query: (body) => ({
+        url: '/employees/login',
+        method: 'POST',
+        body,
+      }),
+    }),
   }),
 });
 
-export const { useRegisterMutation } = authApi;
+export const { useRegisterMutation, useLoginMutation } = authApi;
