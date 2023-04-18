@@ -8,4 +8,5 @@ export const ROUTE = {
   TEAM_MEMBER: '/team/:id',
   ADMINPANEL: '/admin',
   ADMIN_EMP_REGISTER: '/admin/empregister',
+  ACCOUNT: '/account',
 };

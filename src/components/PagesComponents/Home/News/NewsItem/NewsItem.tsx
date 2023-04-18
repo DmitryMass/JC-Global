@@ -51,12 +51,12 @@ const NewsItem: FC<INewsItemProps> = ({
       </div>
       <h2 className={newsItemStyles.titleMobile}>{header}</h2>
       <p className={newsItemStyles.text}>{text}</p>
-      <div className='flex flex-wrap gap-[10px]'>
+      <div className='flex flex-wrap gap-[5px]'>
         {imgPath.length
           ? imgPath.map((img) => (
               <img
                 key={img}
-                className={newsItemStyles.img}
+                className={`${newsItemStyles.img}`}
                 src={`http://localhost:5005/assets/${img}`}
                 alt='test-img'
               />

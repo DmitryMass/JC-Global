@@ -138,7 +138,7 @@ const CreateGoals: FC = () => {
                               {(fieldProps: FieldProps) => (
                                 <div className='flex items-center w-full gap-[5px]'>
                                   <input
-                                    className={`${formStyles.input} grow mb-0 focus:bg-green-100 font-medium`}
+                                    className={`${formStyles.inputGoal} grow  focus:bg-green-100 font-medium`}
                                     placeholder='Ціль'
                                     {...fieldProps.field}
                                   />

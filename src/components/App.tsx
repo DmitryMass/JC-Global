@@ -21,6 +21,7 @@ import {
 } from '@/utils/PROTECTED_ROUTES/protected_routes';
 //
 import './App.scss';
+import Account from '@/pages/Account/Account';
 
 const App: FC = () => {
   const user = useTypedSelector((state) => state.persistSlice.authData);
@@ -56,6 +57,7 @@ const App: FC = () => {
           <Route path={ROUTE.ARCHIVE} element={<Archive />} />
           <Route path={ROUTE.TEAM} element={<Team />} />
           <Route path={ROUTE.TEAM_MEMBER} element={<TeamMember />} />
+          <Route path={ROUTE.ACCOUNT} element={<Account />} />
         </Route>
         <Route
           path={ROUTE.LOGIN}
