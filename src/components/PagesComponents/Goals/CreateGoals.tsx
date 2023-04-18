@@ -1,7 +1,9 @@
 import { FC } from 'react';
+import { useDispatch } from 'react-redux';
 import { Field, FieldArray, FieldProps, Formik, FormikHelpers } from 'formik';
 import useTypedSelector from '@/store/storeHooks/useTypedSelector';
 import { useCreateGoalsMutation } from '@/store/api/goalsApi';
+import useActions from '@/store/storeHooks/useActions';
 //
 import ButtonSubmit from '@/components/Buttons/ButtonSubmit/ButtonSubmit';
 import ErrorModal from '@/components/ErrorModal/ErrorModal';
@@ -10,8 +12,7 @@ import Loader from '@/components/Loader/Loader';
 import { formStyles } from '@/styles/formsStyles';
 import { CustomError } from '@/types/errors';
 import { close } from '@/data/svgStore';
-import { useDispatch } from 'react-redux';
-import useActions from '@/store/storeHooks/useActions';
+import { goalsValidation } from '@/utils/validationSchemas/goalValidation';
 
 interface ICreateGoalsValues {
   month: string;
@@ -54,7 +55,7 @@ const CreateGoals: FC = () => {
       <Formik
         initialValues={{ month: '', goals: [{ goal: '' }] }}
         onSubmit={handleSubmit}
-        validationSchema={''}
+        validationSchema={goalsValidation}
       >
         {({
           handleSubmit,
