@@ -2,7 +2,6 @@ import { FC } from 'react';
 import { NavLink, NavigateFunction, useNavigate } from 'react-router-dom';
 import useTypedSelector from '@/store/storeHooks/useTypedSelector';
 //
-import Theme from '../Theme/Theme';
 import Logo from '../Logo/Logo';
 //
 import { leftBarMenu } from '@/data/leftBarMenuData';
@@ -108,7 +107,6 @@ const LeftBarMenus: FC<ILeftBarMenusProps> = ({
           </NavLink>
         )}
       </div>
-      <Theme />
     </div>
   );
 };

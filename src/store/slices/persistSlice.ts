@@ -3,10 +3,17 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 interface IInitialState {
   authData: ILogin | null;
+  goalsEditData: IGoalEditData | null;
+}
+interface IGoalEditData {
+  month: string;
+  createdAt: string;
+  id: string;
 }
 
 const initialState: IInitialState = {
   authData: null,
+  goalsEditData: null,
 };
 
 export const persistSlice = createSlice({
@@ -18,6 +25,12 @@ export const persistSlice = createSlice({
     },
     logOut: (state) => {
       state.authData = null;
+    },
+    setEditData: (state, { payload }: PayloadAction<IGoalEditData>) => {
+      state.goalsEditData = payload;
+    },
+    clearData: (state) => {
+      state.goalsEditData = null;
     },
   },
 });

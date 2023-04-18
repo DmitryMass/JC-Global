@@ -10,6 +10,8 @@ import DoubleSkelet from '@/components/Skeletons/DoubleSkelet';
 //
 import { IGoalsTypes } from '@/types/goalsTypes';
 import { CustomError } from '@/types/errors';
+import CreateGoals from '@/components/PagesComponents/Goals/CreateGoals';
+import useTypedSelector from '@/store/storeHooks/useTypedSelector';
 
 const Goals: FC = () => {
   const {
@@ -19,6 +21,7 @@ const Goals: FC = () => {
     error,
     isFetching,
   } = useGetGoalsQuery();
+  const user = useTypedSelector((state) => state.persistSlice.authData);
 
   return (
     <ContentWrapper>
@@ -29,6 +32,7 @@ const Goals: FC = () => {
         />
       ) : null}
       <GoalsAndArchiveTitle title='Цілі компанії' />
+      {user?.role === 'admin' ? <CreateGoals /> : null}
       {data?.length
         ? data.map((item: IGoalsTypes) => (
             <GoalsItem key={item._id} item={item} />

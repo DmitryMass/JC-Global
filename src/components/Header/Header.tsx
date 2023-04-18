@@ -33,7 +33,9 @@ const Header: FC = () => {
             <LeftBarMenus
               setMenu={setMenu}
               wrapperModificator={`fixed flex flex-col bg-lightBlue px-[20px] py-[20px] flex justify-center items-center top-0 right-0 w-full h-screen transition-all duration-300 ${
-                menu ? 'translate-y-[0%]' : 'translate-y-[-100%]'
+                menu
+                  ? 'translate-y-[0%] ease-out'
+                  : 'translate-y-[-100%] ease-in'
               }`}
             />
           </div>

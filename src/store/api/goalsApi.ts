@@ -20,6 +20,14 @@ export const goalsApi = createApi({
             ]
           : [{ type: 'Goals', id: 'goalsList' }],
     }),
+    createGoals: build.mutation<{ msg: string }, FormData>({
+      query: (body) => ({
+        url: '/admin/goals',
+        method: 'POST',
+        body,
+      }),
+      invalidatesTags: [{ type: 'Goals', id: 'goalsList' }],
+    }),
     deleteGoal: build.mutation<{ msg: string }, { id: string; goalId: string }>(
       {
         query: ({ id, goalId }) => ({
@@ -71,4 +79,5 @@ export const {
   useEditGoalMutation,
   useArchivedCompanyGoalMutation,
   useGetArchiveCompanyGoalsQuery,
+  useCreateGoalsMutation,
 } = goalsApi;
