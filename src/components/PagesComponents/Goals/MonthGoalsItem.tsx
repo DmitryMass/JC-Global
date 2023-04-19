@@ -104,7 +104,13 @@ const MonthGoalsItem: FC<IMonthGoalsItemProps> = ({ item, mainId }) => {
               <img src={edit} alt='edit' />
             </button>
             <button
-              onClick={() => deleteGoal({ id: mainId, goalId: id as string })}
+              onClick={() =>
+                deleteGoal({
+                  id: mainId,
+                  goalId: id as string,
+                  role: user.role,
+                })
+              }
               className='w-[25px]'
             >
               {isLoading ? <Loader /> : <img src={deleteLogo} alt='delete' />}

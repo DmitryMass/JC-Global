@@ -7,13 +7,18 @@ export const authApi = createApi({
   reducerPath: 'authApi',
   baseQuery: fetchBaseQuery({ baseUrl: URL }),
   endpoints: (build) => ({
-    register: build.mutation<{ msg: string }, FormData>({
-      query: (body) => ({
-        url: '/admin/register',
-        method: 'POST',
-        body,
-      }),
-    }),
+    register: build.mutation<{ msg: string }, { data: FormData; role: string }>(
+      {
+        query: ({ data, role }) => ({
+          url: '/admin/register',
+          method: 'POST',
+          body: data,
+          headers: {
+            role,
+          },
+        }),
+      }
+    ),
     login: build.mutation<ILoginData, FormData>({
       query: (body) => ({
         url: '/employees/login',

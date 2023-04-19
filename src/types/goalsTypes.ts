@@ -16,4 +16,5 @@ export interface IEditGoalData {
   goalId: string;
   status?: boolean;
   newGoal?: string;
+  role?: string;
 }

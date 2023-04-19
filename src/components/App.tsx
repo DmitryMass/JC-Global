@@ -12,6 +12,7 @@ import Team from '@/pages/Team/Team';
 import TeamMember from '@/pages/TeamMember/TeamMember';
 import Admin from '@/pages/Admin/Admin';
 import EmployeeRegister from './PagesComponents/Admin/EmployeeRegister';
+import Account from '@/pages/Account/Account';
 //
 import { ROUTE } from '@/utils/routes';
 import {
@@ -21,7 +22,6 @@ import {
 } from '@/utils/PROTECTED_ROUTES/protected_routes';
 //
 import './App.scss';
-import Account from '@/pages/Account/Account';
 
 const App: FC = () => {
   const user = useTypedSelector((state) => state.persistSlice.authData);

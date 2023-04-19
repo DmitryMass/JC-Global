@@ -39,7 +39,11 @@ const GoalsAndArchiveItemTitle: FC<Props> = ({ createdAt, month, _id }) => {
       <div className='flex items-center gap-[17px]'>
         {user?.role === 'admin' ? (
           <>
-            <button onClick={() => archivedGoals(_id as string)}>
+            <button
+              onClick={() =>
+                archivedGoals({ id: _id as string, role: user.role })
+              }
+            >
               {isLoading ? (
                 <Loader />
               ) : (

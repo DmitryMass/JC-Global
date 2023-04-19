@@ -25,6 +25,7 @@ interface IGoals {
 
 const CreateGoals: FC = () => {
   const [createGoals, { isLoading, isError, error }] = useCreateGoalsMutation();
+  const user = useTypedSelector((state) => state.persistSlice.authData);
   const editData = useTypedSelector(
     (state) => state.persistSlice.goalsEditData
   );
@@ -40,7 +41,7 @@ const CreateGoals: FC = () => {
     body.append('goals', JSON.stringify([...values.goals]));
     editData ? body.append('id', editData.id) : null;
     actions.resetForm();
-    await createGoals(body);
+    await createGoals({ body, role: user?.role as string });
     dispatch(clearData());
   };
 

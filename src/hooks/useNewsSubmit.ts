@@ -3,10 +3,12 @@ import { INewsFormValues } from '@/types/newsFormValues';
 import { FormikHelpers } from 'formik';
 import { useDropzone } from 'react-dropzone';
 import { useCreateNewsMutation } from '@/store/api/newsApi';
+import useTypedSelector from '@/store/storeHooks/useTypedSelector';
 
 export const useNewsSubmit = () => {
   const [file, setFile] = useState<File[] | null>(null);
   const [createNews, { isLoading, isError, error }] = useCreateNewsMutation();
+  const user = useTypedSelector((state) => state.persistSlice.authData);
 
   const handleSubmitNews = async (
     values: INewsFormValues,
@@ -22,7 +24,7 @@ export const useNewsSubmit = () => {
       body.append('files', file);
     });
     setFile(null);
-    await createNews(body);
+    await createNews({ data: body, role: user?.role as string });
   };
 
   const onDrop = useCallback((acceptedFiles: File[]) => {

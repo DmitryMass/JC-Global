@@ -1,21 +1,23 @@
 import { FC, useCallback, useState } from 'react';
 import { Field, Formik, FormikHelpers } from 'formik';
 import { useDropzone } from 'react-dropzone';
+import useTypedSelector from '@/store/storeHooks/useTypedSelector';
 //
 import ButtonSubmit from '@/components/Buttons/ButtonSubmit/ButtonSubmit';
 import BackBtn from '@/components/BackBtn/BackBtn';
+import SuccessModal from '@/components/SuccessModal/SuccessModal';
+import ErrorModal from '@/components/ErrorModal/ErrorModal';
+import Loader from '@/components/Loader/Loader';
 //
 import { add } from '@/data/svgStore';
 import { IRegisterValues } from '@/types/registerFormValues';
 import { useRegisterMutation } from '@/store/api/auth';
-import ErrorModal from '@/components/ErrorModal/ErrorModal';
 import { CustomError } from '@/types/errors';
 import { formStyles } from '@/styles/formsStyles';
 import { registerValidation } from '@/utils/validationSchemas/registerValidation';
-import Loader from '@/components/Loader/Loader';
-import SuccessModal from '@/components/SuccessModal/SuccessModal';
 
 const EmployeeRegister: FC = () => {
+  const user = useTypedSelector((state) => state.persistSlice.authData);
   const [register, { isLoading, isError, error, isSuccess }] =
     useRegisterMutation();
   const [file, setFile] = useState<File | null>(null);
@@ -46,7 +48,7 @@ const EmployeeRegister: FC = () => {
       });
       file && body.append('file', file);
       setFile(null);
-      await register(body);
+      await register({ data: body, role: user?.role as string });
     } catch (err) {
       console.error(err);
     }

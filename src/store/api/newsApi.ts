@@ -20,18 +20,27 @@ export const newsApi = createApi({
             ]
           : [{ type: 'News', id: 'newsList' }],
     }),
-    createNews: build.mutation<{ msg: string }, FormData>({
+    createNews: build.mutation<
+      { msg: string },
+      { data: FormData; role: string }
+    >({
       query: (body) => ({
         url: '/admin/news',
         method: 'POST',
-        body,
+        body: body.data,
+        headers: {
+          role: body.role,
+        },
       }),
       invalidatesTags: [{ type: 'News', id: 'newsList' }],
     }),
-    deleteNews: build.mutation<{ msg: string }, string>({
-      query: (id) => ({
+    deleteNews: build.mutation<{ msg: string }, { id: string; role: string }>({
+      query: ({ id, role }) => ({
         url: `/admin/news/${id}`,
         method: 'DELETE',
+        headers: {
+          role,
+        },
       }),
       invalidatesTags: [{ type: 'News', id: 'newsList' }],
     }),

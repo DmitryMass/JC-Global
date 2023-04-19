@@ -22,6 +22,7 @@ const NewsItem: FC<INewsItemProps> = ({
   const user = useTypedSelector((state) => state.persistSlice.authData);
   const [deleteNews, { isLoading, isError, error }] = useDeleteNewsMutation();
   const date = convertDate(createdAt);
+
   return (
     <div className={newsItemStyles.wrapper}>
       {isError ? (
@@ -39,7 +40,9 @@ const NewsItem: FC<INewsItemProps> = ({
             <button onClick={() => {}}>
               <img className='w-[25px]' src={edit} alt='edit' />
             </button>
-            <button onClick={() => deleteNews(_id as string)}>
+            <button
+              onClick={() => deleteNews({ id: _id as string, role: user.role })}
+            >
               {isLoading ? (
                 <Loader />
               ) : (

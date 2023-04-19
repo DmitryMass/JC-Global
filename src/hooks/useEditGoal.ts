@@ -21,6 +21,7 @@ export const useEditGoals = (complete?: boolean) => {
       id: mainId,
       goalId: id as string,
       status: !complete,
+      role: user?.role,
     });
     setMenu(false);
     return;
@@ -36,6 +37,7 @@ export const useEditGoals = (complete?: boolean) => {
       goalId: id as string,
       status: complete,
       newGoal,
+      role: user?.role,
     });
   };
 

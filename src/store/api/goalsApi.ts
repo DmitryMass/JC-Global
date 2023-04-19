@@ -20,38 +20,55 @@ export const goalsApi = createApi({
             ]
           : [{ type: 'Goals', id: 'goalsList' }],
     }),
-    createGoals: build.mutation<{ msg: string }, FormData>({
+    createGoals: build.mutation<
+      { msg: string },
+      { body: FormData; role: string }
+    >({
       query: (body) => ({
         url: '/admin/goals',
         method: 'POST',
-        body,
+        body: body.body,
+        headers: {
+          role: body.role,
+        },
       }),
       invalidatesTags: [{ type: 'Goals', id: 'goalsList' }],
     }),
-    deleteGoal: build.mutation<{ msg: string }, { id: string; goalId: string }>(
-      {
-        query: ({ id, goalId }) => ({
-          url: `/admin/goals/${id}`,
-          method: 'DELETE',
-          headers: {
-            goalid: goalId,
-          },
-        }),
-        invalidatesTags: [{ type: 'Goals', id: 'goalsList' }],
-      }
-    ),
+    deleteGoal: build.mutation<
+      { msg: string },
+      { id: string; goalId: string; role: string }
+    >({
+      query: ({ id, goalId, role }) => ({
+        url: `/admin/goals/${id}`,
+        method: 'DELETE',
+        headers: {
+          goalid: goalId,
+          role,
+        },
+      }),
+      invalidatesTags: [{ type: 'Goals', id: 'goalsList' }],
+    }),
     editGoal: build.mutation<{ msg: string }, IEditGoalData>({
       query: (body) => ({
         url: `/admin/goals/${body.id}`,
         method: 'PUT',
         body,
+        headers: {
+          role: body.role,
+        },
       }),
       invalidatesTags: [{ type: 'Goals', id: 'goalsList' }],
     }),
-    archivedCompanyGoal: build.mutation<{ msg: string }, string>({
-      query: (id) => ({
+    archivedCompanyGoal: build.mutation<
+      { msg: string },
+      { id: string; role: string }
+    >({
+      query: ({ id, role }) => ({
         url: `/admin/goals/${id}`,
         method: 'PATCH',
+        headers: {
+          role: role,
+        },
       }),
       invalidatesTags: [
         { type: 'Goals', id: 'goalsList' },

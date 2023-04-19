@@ -12,6 +12,7 @@ import { CustomError } from '@/types/errors';
 import TeamMemberInfo from './TeamMemberInfo';
 import TeamMemberPlans from './TeamMemberPlans';
 import TeamMemberSchedule from './TeamMemberSchedule';
+import TMPlanForm from './TMPlanForm';
 
 const TeamMember: FC = () => {
   const { id } = useParams();
@@ -35,7 +36,8 @@ const TeamMember: FC = () => {
       {data ? (
         <>
           <TeamMemberInfo data={data} />
-          <TeamMemberPlans />
+          <TMPlanForm />
+          <TeamMemberPlans data={data} />
           <TeamMemberSchedule />
         </>
       ) : null}

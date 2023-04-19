@@ -1,81 +1,9 @@
 import { FC } from 'react';
-import { Link } from 'react-router-dom';
-import {
-  Chart as ChartJS,
-  CategoryScale,
-  LinearScale,
-  PointElement,
-  LineElement,
-  Title,
-  Tooltip,
-  Filler,
-  Legend,
-} from 'chart.js';
-import { Line } from 'react-chartjs-2'; //
 import ContentWrapper from '@/components/ContentWrapper/ContentWrapper';
+import Plans from '@/components/Plans/Plans';
 //
-import { admin } from '@/data/svgStore';
 import TeamMemberInfo from '../TeamMember/TeamMemberInfo';
 //
-
-ChartJS.register(
-  CategoryScale,
-  LinearScale,
-  PointElement,
-  LineElement,
-  Title,
-  Tooltip,
-  Filler,
-  Legend
-);
-
-export const options = {
-  responsive: true,
-  plugins: {
-    legend: {
-      position: 'top' as const,
-    },
-    title: {
-      display: true,
-      text: 'Виконання валового плану за 2022 рік.',
-    },
-  },
-};
-
-const labels = [
-  'Січень',
-  'Лютий',
-  'Березень',
-  'Квітень',
-  'Травень',
-  'Червень',
-  'Липень',
-  'Серпень',
-  'Вересень',
-  'Жовтень',
-  'Листопад',
-  'Грудень',
-];
-
-export const data = {
-  labels,
-  datasets: [
-    {
-      fill: true,
-      label: 'План',
-      data: labels.map(() => Math.random() * 10000),
-      borderColor: 'rgb(53, 162, 235)',
-      backgroundColor: 'rgba(53, 162, 235, 0.5)',
-    },
-    {
-      fill: true,
-      label: 'Виконано',
-      data: labels.map(() => Math.random() * 10000),
-      borderColor: 'rgb(53, 196, 97)',
-      backgroundColor: 'rgb(53, 196, 97, 0.5)',
-    },
-  ],
-};
 
 const Account: FC = () => {
   return (
@@ -99,9 +27,7 @@ const Account: FC = () => {
             }}
           />
         </div>
-        <div className='bg-white rounded-[6px] min-h-[200px] flex justify-center items-center w-full'>
-          <Line className='h-full' options={options} data={data} />
-        </div>
+        {/* <Plans /> */}
       </div>
     </ContentWrapper>
   );
