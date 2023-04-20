@@ -54,7 +54,11 @@ const fakeData = [
 
 const TeamMemberSchedule: FC = () => {
   return (
-    <div className={teamStyles.memberWrapper}>
+    <div className={'bg-white rounded-[6px] p-[20px] shadow-md'}>
+      <span className='font-bold mb-[20px] block'>
+        Добавить проверку даты. Если сегодняшняя дата не совпадает с той что в
+        списке, нельзя будет отметится
+      </span>
       <div className='grid grid-cols-7 gap-[30px] max-[992px]:grid-cols-5 max-[576px]:grid-cols-3 max-[400px]:grid-cols-2'>
         {fakeData.map(({ active, id, time, data }: any) => (
           <div className='flex flex-col items-center gap-[5px]' key={id}>

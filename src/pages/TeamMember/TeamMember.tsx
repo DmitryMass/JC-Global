@@ -7,14 +7,14 @@ import MemberTitle from '@/components/PagesComponents/Team/MemberTitle';
 import Loader from '@/components/Loader/Loader';
 import ErrorModal from '@/components/ErrorModal/ErrorModal';
 import DoubleSkelet from '@/components/Skeletons/DoubleSkelet';
-//
-import { CustomError } from '@/types/errors';
-import TeamMemberInfo from './TeamMemberInfo';
 import TeamMemberPlans from './TeamMemberPlans';
+import TeamMemberInfo from './TeamMemberInfo';
 import TeamMemberSchedule from './TeamMemberSchedule';
 import TMPlanForm from './TMPlanForm';
 import EmptyData from '@/components/PagesComponents/EmptyData';
 import TeamMemberHrPlans from './TeamMemberHrPlans';
+//
+import { CustomError } from '@/types/errors';
 
 const TeamMember: FC = () => {
   const { id } = useParams();
