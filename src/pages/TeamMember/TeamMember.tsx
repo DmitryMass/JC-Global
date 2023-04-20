@@ -13,34 +13,38 @@ import TeamMemberInfo from './TeamMemberInfo';
 import TeamMemberPlans from './TeamMemberPlans';
 import TeamMemberSchedule from './TeamMemberSchedule';
 import TMPlanForm from './TMPlanForm';
+import EmptyData from '@/components/PagesComponents/EmptyData';
+import TeamMemberHrPlans from './TeamMemberHrPlans';
 
 const TeamMember: FC = () => {
   const { id } = useParams();
-  const { isLoading, isError, error, data, refetch } = useGetEmployeeQuery(
-    id as string,
-    {
+  const { isLoading, isError, error, data, refetch, isFetching } =
+    useGetEmployeeQuery(id as string, {
       skip: !id,
-    }
-  );
+    });
 
   return (
     <ContentWrapper>
-      {isError ? (
+      {isError && (
         <ErrorModal
           isError={isError}
           error={(error as CustomError)?.data?.msg}
         />
-      ) : null}
+      )}
       <MemberTitle name={data ? data.fullName : <Loader />} />
-      {isLoading ? <DoubleSkelet /> : null}
-      {data ? (
+      {isLoading && <DoubleSkelet />}
+      {data && <TeamMemberInfo data={data} />}
+      {data?.category.toLowerCase() === 'sales' && (
         <>
-          <TeamMemberInfo data={data} />
           <TMPlanForm refetch={refetch} data={data} />
           <TeamMemberPlans data={data} />
-          <TeamMemberSchedule />
         </>
-      ) : null}
+      )}
+      {data?.category.toLowerCase() === 'hr' && <TeamMemberHrPlans />}
+      {data && <TeamMemberSchedule />}
+      {!data && !isFetching && (
+        <EmptyData title='Не знайдено інформації по даному співробітнику' />
+      )}
     </ContentWrapper>
   );
 };
