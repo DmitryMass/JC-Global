@@ -7,4 +7,5 @@ export interface ILogin {
   fullName: string;
   role: string;
   token: string;
+  id: string;
 }

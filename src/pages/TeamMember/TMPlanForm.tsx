@@ -1,17 +1,18 @@
-import { FC, useState } from 'react';
+import { FC, memo, useState } from 'react';
 import { Field, Formik, FormikHelpers } from 'formik';
 import useTypedSelector from '@/store/storeHooks/useTypedSelector';
+import { useCreateEmployeePlanMutation } from '@/store/api/employeesApi';
 //
 import ButtonSubmit from '@/components/Buttons/ButtonSubmit/ButtonSubmit';
 import Loader from '@/components/Loader/Loader';
+import ErrorModal from '@/components/ErrorModal/ErrorModal';
 //
 import { monthLabels } from '@/data/additionalData';
 import { IEmployee } from '@/types/employee';
 import { formStyles } from '@/styles/formsStyles';
-import { useCreateEmployeePlanMutation } from '@/store/api/employeesApi';
-import ErrorModal from '@/components/ErrorModal/ErrorModal';
 import { CustomError } from '@/types/errors';
-import DoubleSkelet from '@/components/Skeletons/DoubleSkelet';
+import { planValidation } from '@/utils/validationSchemas/planValidation';
+import { planStyles } from '@/styles/planStyles';
 
 interface IInitialValues {
   frontPlan: string;
@@ -53,15 +54,12 @@ const TMPlanForm: FC<{ data: IEmployee; refetch: any }> = ({
           error={(error as CustomError)?.data?.msg}
         />
       ) : null}
-      {isLoading ? <DoubleSkelet /> : null}
       {user?.role === 'admin' ? (
-        <div className='bg-gray bg-opacity-20 w-full rounded-[6px] p-[20px] mb-[20px] shadow-md'>
-          <h3 className='mb-[10px] font-semibold text-darkBlue opacity-80 ml-[7px]'>
-            Форма для визначення планів
-          </h3>
+        <div className={planStyles.wrapper}>
+          <h3 className={planStyles.title}>Форма для визначення планів</h3>
           <div className='flex flex-col gap-[5px] text-black'>
             <select
-              className={`${formStyles.blueInput} text-blue-500 font-medium`}
+              className={`${formStyles.blueInput} text-blue-500 font-medium mb-[15px]`}
               name='select'
               onChange={(e) => setSelectData(e.target.value)}
             >
@@ -78,6 +76,7 @@ const TMPlanForm: FC<{ data: IEmployee; refetch: any }> = ({
             <Formik
               onSubmit={handleSubmit}
               initialValues={{ frontPlan: '', backPlan: '' }}
+              validationSchema={planValidation}
             >
               {({
                 handleSubmit,
@@ -88,9 +87,9 @@ const TMPlanForm: FC<{ data: IEmployee; refetch: any }> = ({
                 touched,
               }) => (
                 <form onSubmit={handleSubmit}>
-                  <div className='flex'>
+                  <div className='flex max-[576px]:flex-col'>
                     <label
-                      className='block mb-[20px] flex-1'
+                      className='block mb-[20px] flex-1 relative'
                       htmlFor='frontPlan'
                     >
                       {touched.frontPlan && errors.frontPlan && (
@@ -110,7 +109,7 @@ const TMPlanForm: FC<{ data: IEmployee; refetch: any }> = ({
                       />
                     </label>
                     <label
-                      className='block mb-[20px] flex-1'
+                      className='block mb-[20px] flex-1 relative'
                       htmlFor='backPlan'
                     >
                       {touched.backPlan && errors.backPlan && (
@@ -130,20 +129,20 @@ const TMPlanForm: FC<{ data: IEmployee; refetch: any }> = ({
                       />
                     </label>
                   </div>
-                  <ButtonSubmit modificator='flex justify-center items-center max-w-[200px] w-full bg-blue-700 shadow-sm shadow-blue-400 hover:shadow-md hover:shadow-blue-300 transition-all duration-150 p-[5px] rounded-[4px] text-white text-m leading-m mb-[10px]'>
+                  <ButtonSubmit modificator={planStyles.submitBtn}>
                     {isLoading ? <Loader /> : 'Додати'}
                   </ButtonSubmit>
-                  <div className='flex flex-col  text-center max-w-[200px] w-full ml-auto items-center'>
-                    <span className='text-sm text-black font-bold mb-[5px]'>
-                      Додати план за рік
-                    </span>
-                    <ButtonSubmit modificator='flex justify-center items-center max-w-[200px] w-full bg-blue-700 shadow-sm shadow-blue-400 hover:shadow-md hover:shadow-blue-300 transition-all duration-150 p-[5px] rounded-[4px] text-white text-m leading-m'>
-                      В Архів
-                    </ButtonSubmit>
-                  </div>
                 </form>
               )}
             </Formik>
+            <div className='flex flex-col  text-center max-w-[200px] w-full ml-auto items-center max-[576px]:mx-auto'>
+              <span className='text-sm text-black font-bold mb-[5px]'>
+                Додати план за рік
+              </span>
+              <ButtonSubmit modificator={planStyles.submitBtn}>
+                В Архів
+              </ButtonSubmit>
+            </div>
           </div>
         </div>
       ) : null}
@@ -151,4 +150,4 @@ const TMPlanForm: FC<{ data: IEmployee; refetch: any }> = ({
   );
 };
 
-export default TMPlanForm;
+export default memo(TMPlanForm);

@@ -44,6 +44,14 @@ export const employeesApi = createApi({
       }),
       invalidatesTags: [{ type: 'Employees', id: 'employeeId' }],
     }),
+    setEmployeePlanActive: build.mutation<any, { data: FormData; id: string }>({
+      query: ({ data, id }) => ({
+        url: `/admin/employeePlan/${id}`,
+        method: 'POST',
+        body: data,
+      }),
+      invalidatesTags: [{ type: 'Employees', id: 'employeeId' }],
+    }),
   }),
 });
 
@@ -51,4 +59,5 @@ export const {
   useGetCategoriesQuery,
   useGetEmployeeQuery,
   useCreateEmployeePlanMutation,
+  useSetEmployeePlanActiveMutation,
 } = employeesApi;
