@@ -13,6 +13,7 @@ import { CustomError } from '@/types/errors';
 import { github, linkedin } from '@/data/svgStore';
 import { formStyles } from '@/styles/formsStyles';
 import '@/styles/scss-styles/login.scss';
+import { loginValidation } from '@/utils/validationSchemas/loginValidation';
 
 interface ILoginValues {
   email: string;
@@ -70,6 +71,7 @@ const Login: FC = () => {
             <Formik
               onSubmit={handleSubmit}
               initialValues={{ email: '', password: '' }}
+              validationSchema={loginValidation}
             >
               {({
                 handleSubmit,
@@ -80,7 +82,7 @@ const Login: FC = () => {
                 touched,
               }) => (
                 <form onSubmit={handleSubmit}>
-                  <label className='block mb-[20px]' htmlFor='email'>
+                  <label className='block mb-[20px] relative' htmlFor='email'>
                     {touched.email && errors.email && (
                       <span className={formStyles.formError}>
                         {errors.email}
@@ -97,7 +99,10 @@ const Login: FC = () => {
                       placeholder='Enter email'
                     />
                   </label>
-                  <label className='block mb-[20px]' htmlFor='password'>
+                  <label
+                    className='block mb-[20px] relative'
+                    htmlFor='password'
+                  >
                     {touched.password && errors.password && (
                       <span className={formStyles.formError}>
                         {errors.password}

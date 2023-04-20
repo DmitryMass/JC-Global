@@ -1,6 +1,6 @@
 export const formStyles = {
   formError:
-    'text-sm leading-sm font-medium absolute top-[-18px] left-[2px] text-red-700',
+    'text-sm leading-sm font-semibold absolute top-[-18px] left-[2px] text-red-600',
   textarea:
     'w-full outline-none border-[1px] border-opacity-10 border-black p-[5px] rounded-[4px] text-m leading-m font-medium h-[60px] max-h-[135px] resize-y',
   input:
