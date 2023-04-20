@@ -83,7 +83,7 @@ const AddActiveEmployeePlan: FC<{ data: IEmployee; refetch: any }> = ({
               touched,
             }) => (
               <form onSubmit={handleSubmit}>
-                <div className='flex  max-[576px]:flex-col'>
+                <div className='flex  max-[576px]:flex-col gap-[5px]'>
                   <label
                     className='block mb-[20px] flex-1 relative'
                     htmlFor='frontPlan'

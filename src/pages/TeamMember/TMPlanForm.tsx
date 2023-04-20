@@ -87,7 +87,7 @@ const TMPlanForm: FC<{ data: IEmployee; refetch: any }> = ({
                 touched,
               }) => (
                 <form onSubmit={handleSubmit}>
-                  <div className='flex max-[576px]:flex-col'>
+                  <div className='flex max-[576px]:flex-col gap-[5px]'>
                     <label
                       className='block mb-[20px] flex-1 relative'
                       htmlFor='frontPlan'
@@ -136,7 +136,7 @@ const TMPlanForm: FC<{ data: IEmployee; refetch: any }> = ({
               )}
             </Formik>
             <div className='flex flex-col  text-center max-w-[200px] w-full ml-auto items-center max-[576px]:mx-auto'>
-              <span className='text-sm text-black font-bold mb-[5px]'>
+              <span className='text-sm font-bold mb-[5px] text-white'>
                 Додати план за рік
               </span>
               <ButtonSubmit modificator={planStyles.submitBtn}>
