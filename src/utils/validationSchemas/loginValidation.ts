@@ -1,7 +1,10 @@
 import * as yup from 'yup';
 
 export const loginValidation = yup.object().shape({
-  email: yup.string().email().required(`Пошта обов'язкове поле`),
+  email: yup
+    .string()
+    .email('Приклад: example@gmail.com')
+    .required(`Пошта обов'язкове поле`),
   password: yup
     .string()
     .min(5, 'Мінімум 5 символів')
