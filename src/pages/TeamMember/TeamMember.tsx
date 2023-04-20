@@ -16,7 +16,7 @@ import TMPlanForm from './TMPlanForm';
 
 const TeamMember: FC = () => {
   const { id } = useParams();
-  const { isLoading, isError, error, data } = useGetEmployeeQuery(
+  const { isLoading, isError, error, data, refetch } = useGetEmployeeQuery(
     id as string,
     {
       skip: !id,
@@ -36,7 +36,7 @@ const TeamMember: FC = () => {
       {data ? (
         <>
           <TeamMemberInfo data={data} />
-          <TMPlanForm />
+          <TMPlanForm refetch={refetch} data={data} />
           <TeamMemberPlans data={data} />
           <TeamMemberSchedule />
         </>

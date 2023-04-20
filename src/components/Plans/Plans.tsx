@@ -11,6 +11,7 @@ import {
   Legend,
 } from 'chart.js';
 import { Line } from 'react-chartjs-2'; //
+import { monthLabels } from '@/data/additionalData';
 
 ChartJS.register(
   CategoryScale,
@@ -43,7 +44,7 @@ const Plans: FC<IPlansProps> = ({ active, plan, title }) => {
     },
   };
   const data = {
-    labels,
+    labels: monthLabels,
     datasets: [
       {
         fill: true,
@@ -63,20 +64,5 @@ const Plans: FC<IPlansProps> = ({ active, plan, title }) => {
   };
   return <Line className='h-full' options={options} data={data} />;
 };
-
-const labels = [
-  'Січень',
-  'Лютий',
-  'Березень',
-  'Квітень',
-  'Травень',
-  'Червень',
-  'Липень',
-  'Серпень',
-  'Вересень',
-  'Жовтень',
-  'Листопад',
-  'Грудень',
-];
 
 export default memo(Plans);
