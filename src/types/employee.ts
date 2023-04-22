@@ -9,7 +9,7 @@ export interface IEmployee {
   vacation?: string;
   category: string;
   plans: IPlans[];
-  schedule: any[];
+  schedule: IEmployeeMonthSchedule[];
   createdAt?: string;
 }
 
@@ -23,4 +23,15 @@ export interface IPlans {
     plan: string;
     active: string;
   };
+}
+
+export interface IEmployeeMonthSchedule {
+  [month: string]: EmployeeDaySchedule[];
+}
+
+export interface EmployeeDaySchedule {
+  date: string;
+  dayWorked: boolean;
+  dayWorkedCount: number;
+  schedule: string;
 }

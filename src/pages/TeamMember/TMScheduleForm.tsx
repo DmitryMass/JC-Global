@@ -1,8 +1,9 @@
-import { FC, useState } from 'react';
+import { FC, memo, useState } from 'react';
+import DatePicker from 'react-datepicker';
 import { Field, FieldProps, Formik, FormikHelpers } from 'formik';
 import { format } from 'date-fns';
-import DatePicker from 'react-datepicker';
 import useTypedSelector from '@/store/storeHooks/useTypedSelector';
+import { useSetEmployeeScheduleMutation } from '@/store/api/employeesApi';
 //
 import ErrorModal from '@/components/ErrorModal/ErrorModal';
 import Loader from '@/components/Loader/Loader';
@@ -12,6 +13,8 @@ import { monthLabels } from '@/data/additionalData';
 import { formStyles } from '@/styles/formsStyles';
 import { planStyles } from '@/styles/planStyles';
 import { CustomError } from '@/types/errors';
+import { IOptions } from '@/types/scheduleTypes';
+import { optionsSchedule } from '@/data/scheduleDate';
 import 'react-datepicker/dist/react-datepicker.css';
 
 interface IInitialValues {
@@ -20,9 +23,11 @@ interface IInitialValues {
   month: string;
 }
 
-const TMScheduleForm: FC = () => {
+const TMScheduleForm: FC<{ id: string }> = ({ id }) => {
   const [startDate, setStartDate] = useState<Date>(new Date());
   const user = useTypedSelector((state) => state.persistSlice.authData);
+  const [setEmployeeSchedule, { isLoading, isError, error }] =
+    useSetEmployeeScheduleMutation();
 
   const handleSubmit = async (
     values: IInitialValues,
@@ -36,8 +41,7 @@ const TMScheduleForm: FC = () => {
       });
       body.append('date', formatedDate);
       actions.resetForm();
-
-      console.log({ ...values, date: formatedDate });
+      await setEmployeeSchedule({ data: body, id, role: user?.role as string });
     } catch (err) {
       console.error(err);
     }
@@ -45,12 +49,12 @@ const TMScheduleForm: FC = () => {
 
   return (
     <>
-      {/* {isError ? (
+      {isError ? (
         <ErrorModal
           isError={isError}
           error={(error as CustomError)?.data?.msg}
         />
-      ) : null} */}
+      ) : null}
       {user?.role === 'admin' ? (
         <div className={planStyles.wrapper}>
           <h3 className={planStyles.title}>Графік роботи співробітника</h3>
@@ -95,7 +99,7 @@ const TMScheduleForm: FC = () => {
                         as='select'
                         name='schedule'
                       >
-                        {options.map((option: IOptions) => (
+                        {optionsSchedule.map((option: IOptions) => (
                           <option key={option.value} value={option.value}>
                             {option.label}
                           </option>
@@ -128,18 +132,11 @@ const TMScheduleForm: FC = () => {
                     </div>
                   </div>
                   <ButtonSubmit modificator={planStyles.submitBtn}>
-                    {/* {isLoading ? <Loader /> : 'Додати'} */}
-                    Додати
+                    {isLoading ? <Loader /> : 'Додати'}
                   </ButtonSubmit>
                 </form>
               )}
             </Formik>
-            {/* <div className='flex flex-col  text-center max-w-[200px] w-full ml-auto items-center max-[576px]:mx-auto'>
-                <span className='text-sm font-bold mb-[5px] text-white'></span>
-                <ButtonSubmit modificator={planStyles.submitBtn}>
-                  В Архів
-                </ButtonSubmit>
-              </div> */}
           </div>
         </div>
       ) : null}
@@ -147,19 +144,4 @@ const TMScheduleForm: FC = () => {
   );
 };
 
-interface IOptions {
-  value: string;
-  label: string;
-}
-const options: IOptions[] = [
-  { value: '8:00 - 18:00', label: '8:00 - 18:00' },
-  { value: '8:00 - 14:00', label: '8:00 - 14:00' },
-  { value: '12:00 - 18:00', label: '12:00 - 18:00' },
-  { value: 'Вихідний', label: 'Вихідний' },
-  { value: 'Відпустка', label: 'Відпустка' },
-  { value: 'Лікарняний', label: 'Лікарняний' },
-  { value: 'Сім.об або інше', label: 'Сім.об або інше' },
-  { value: 'custom', label: 'Інший час' },
-];
-
-export default TMScheduleForm;
+export default memo(TMScheduleForm);

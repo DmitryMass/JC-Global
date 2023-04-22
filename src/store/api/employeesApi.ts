@@ -4,15 +4,17 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
 const URL = 'http://localhost:5005';
 
-interface IPlanData {
-  frontPlan?: string;
-  backPlan?: string;
+export interface IMarkTheShiftData {
   month: string;
+  date: string;
+  id: string;
+  dayWorked: boolean;
+  dayWorkedCount: number;
 }
 
 export const employeesApi = createApi({
   reducerPath: 'employeesApi',
-  tagTypes: ['Employees'],
+  tagTypes: ['Employee'],
   baseQuery: fetchBaseQuery({ baseUrl: URL }),
   endpoints: (build) => ({
     getCategories: build.query<IEmployeesCategory, void>({
@@ -25,10 +27,8 @@ export const employeesApi = createApi({
     getEmployee: build.query<IEmployee, string>({
       query: (id) => ({
         url: `/employees/employee/${id}`,
-        providesTags: [
-          { type: 'Employee', id: (employeeId: any) => employeeId },
-        ],
       }),
+      providesTags: [{ type: 'Employee', id: 'employeeId' }],
     }),
     createEmployeePlan: build.mutation<
       any,
@@ -42,7 +42,7 @@ export const employeesApi = createApi({
           role,
         },
       }),
-      invalidatesTags: [{ type: 'Employees', id: 'employeeId' }],
+      invalidatesTags: [{ type: 'Employee', id: 'employeeId' }],
     }),
     setEmployeePlanActive: build.mutation<any, { data: FormData; id: string }>({
       query: ({ data, id }) => ({
@@ -50,7 +50,29 @@ export const employeesApi = createApi({
         method: 'POST',
         body: data,
       }),
-      invalidatesTags: [{ type: 'Employees', id: 'employeeId' }],
+      invalidatesTags: [{ type: 'Employee', id: 'employeeId' }],
+    }),
+    markTheShift: build.mutation<{ msg: string }, IMarkTheShiftData>({
+      query: ({ id, dayWorked, dayWorkedCount, date, month }) => ({
+        url: `/admin/schedule/${id}`,
+        method: 'PUT',
+        body: { dayWorked, dayWorkedCount, date, month },
+      }),
+      invalidatesTags: [{ type: 'Employee', id: 'employeeId' }],
+    }),
+    setEmployeeSchedule: build.mutation<
+      { msg: string },
+      { data: FormData; id: string; role: string }
+    >({
+      query: ({ data, id, role }) => ({
+        url: `/admin/schedule/${id}`,
+        method: 'POST',
+        body: data,
+        headers: {
+          role,
+        },
+      }),
+      invalidatesTags: [{ type: 'Employee', id: 'employeeId' }],
     }),
   }),
 });
@@ -60,4 +82,6 @@ export const {
   useGetEmployeeQuery,
   useCreateEmployeePlanMutation,
   useSetEmployeePlanActiveMutation,
+  useMarkTheShiftMutation,
+  useSetEmployeeScheduleMutation,
 } = employeesApi;

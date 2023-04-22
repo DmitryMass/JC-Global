@@ -18,10 +18,7 @@ interface IInitialValues {
   backActive: string;
 }
 
-const AddActiveEmployeePlan: FC<{ data: IEmployee; refetch: any }> = ({
-  data,
-  refetch,
-}) => {
+const AddActiveEmployeePlan: FC<{ data: IEmployee }> = ({ data }) => {
   const [selectData, setSelectData] = useState<string>(monthLabels[0]);
   const [setEmployeePlanActive, { isLoading, isError, error }] =
     useSetEmployeePlanActiveMutation();
@@ -39,8 +36,8 @@ const AddActiveEmployeePlan: FC<{ data: IEmployee; refetch: any }> = ({
       data: body,
       id: data._id as string,
     });
-    refetch();
   };
+
   return (
     <>
       {isError ? (

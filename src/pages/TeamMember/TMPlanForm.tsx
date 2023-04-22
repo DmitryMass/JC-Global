@@ -19,10 +19,7 @@ interface IInitialValues {
   backPlan: string;
 }
 
-const TMPlanForm: FC<{ data: IEmployee; refetch: any }> = ({
-  data,
-  refetch,
-}) => {
+const TMPlanForm: FC<{ data: IEmployee }> = ({ data }) => {
   const [createEmployeePlan, { isLoading, isError, error }] =
     useCreateEmployeePlanMutation();
   const [selectData, setSelectData] = useState<string>(monthLabels[0]);
@@ -43,7 +40,6 @@ const TMPlanForm: FC<{ data: IEmployee; refetch: any }> = ({
       id: data._id as string,
       role: user?.role as string,
     });
-    refetch();
   };
 
   return (

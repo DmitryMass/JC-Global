@@ -1,21 +1,20 @@
 import { FC } from 'react';
-import ContentWrapper from '@/components/ContentWrapper/ContentWrapper';
-import Plans from '@/components/Plans/Plans';
-//
-import TeamMemberInfo from '../TeamMember/TeamMemberInfo';
 import { useGetEmployeeQuery } from '@/store/api/employeesApi';
 import useTypedSelector from '@/store/storeHooks/useTypedSelector';
+//
+import ContentWrapper from '@/components/ContentWrapper/ContentWrapper';
+import TeamMemberInfo from '../TeamMember/TeamMemberInfo';
 import DoubleSkelet from '@/components/Skeletons/DoubleSkelet';
 import ErrorModal from '@/components/ErrorModal/ErrorModal';
-import { CustomError } from '@/types/errors';
 import TeamMemberPlans from '../TeamMember/TeamMemberPlans';
 import AddActiveEmployeePlan from '@/components/PagesComponents/Account/AddActiveEmployeePlan';
 import TeamMemberSchedule from '../TeamMember/TeamMemberSchedule';
 //
+import { CustomError } from '@/types/errors';
 
 const Account: FC = () => {
   const user = useTypedSelector((state) => state.persistSlice.authData);
-  const { isLoading, isError, error, data, refetch } = useGetEmployeeQuery(
+  const { isLoading, isError, error, data } = useGetEmployeeQuery(
     user?.id as string,
     { skip: !user?.id }
   );
@@ -32,9 +31,9 @@ const Account: FC = () => {
       {data ? (
         <>
           <TeamMemberInfo data={data} />
-          <AddActiveEmployeePlan refetch={refetch} data={data} />
+          <AddActiveEmployeePlan data={data} />
           <TeamMemberPlans data={data} />
-          <TeamMemberSchedule />
+          <TeamMemberSchedule data={data} id={user?.id as string} />
         </>
       ) : null}
     </ContentWrapper>

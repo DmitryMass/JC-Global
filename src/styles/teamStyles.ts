@@ -22,9 +22,9 @@ export const teamStyles = {
     'text-white text-sm leading-sm font-medium pointer-events-none',
   // team members
   memberWrapper:
-    'bg-white rounded-[6px] p-[20px] flex items-center max-[768px]:flex-col max-[768px]:w-full gap-[20px] shadow-md max-[768px]:text-center justify-center mb-[20px]',
+    'bg-white rounded-[6px] p-[20px] flex items-center max-[768px]:flex-col max-[768px]:w-full gap-[20px] shadow-md max-[768px]:text-center justify-center mb-[20px] max-[768px]:gap-[10px] ',
   memberPhoto:
-    'max-w-[180px] w-full h-[200px] object-cover ml-[-60px]  rounded-[24px] shadow-md  max-[992px]:ml-[-30px] max-[768px]:mt-[-40px] max-[768px]:ml-0 max-[768px]:h-[150px]',
+    'max-w-[180px] w-full h-[200px] object-cover ml-[-60px]  rounded-[24px] shadow-md  max-[992px]:ml-[-30px] max-[768px]:mt-[-20px] max-[768px]:ml-0 max-[768px]:h-[200px]',
   memberJobTitle: 'text-darkBlue font-bold text-xl leading-xl mb-[5px]',
   memberAdditional:
     'text-classic leading-classic font-medium mb-[5px] text-darkBlue',

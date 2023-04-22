@@ -3,8 +3,10 @@ import { teamStyles } from '@/styles/teamStyles';
 import { IEmployee } from '@/types/employee';
 import { unnamed } from '@/data/imagesStore';
 import { convertDate } from '@/utils/additionalFunc/dateConvert';
+import useTypedSelector from '@/store/storeHooks/useTypedSelector';
 
 const TeamMemberInfo: FC<{ data: IEmployee }> = ({ data }) => {
+  const user = useTypedSelector((state) => state.persistSlice.authData);
   const createDate = useMemo(
     () => convertDate(data?.createdAt as string),
     [data]
@@ -34,6 +36,12 @@ const TeamMemberInfo: FC<{ data: IEmployee }> = ({ data }) => {
         <p className={teamStyles.memberAdditional}>
           <span className='text-gray mr-[5px]'>Працює з:</span> {createDate}
         </p>
+        {user?.id === data._id ? (
+          <p className={teamStyles.memberAdditional}>
+            <span className='text-gray mr-[5px]'>Днів відпустки:</span>
+            {data.vacation}
+          </p>
+        ) : null}
       </div>
     </div>
   );
