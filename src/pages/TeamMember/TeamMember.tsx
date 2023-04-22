@@ -15,6 +15,7 @@ import EmptyData from '@/components/PagesComponents/EmptyData';
 import TeamMemberHrPlans from './TeamMemberHrPlans';
 //
 import { CustomError } from '@/types/errors';
+import TMScheduleForm from './TMScheduleForm';
 
 const TeamMember: FC = () => {
   const { id } = useParams();
@@ -41,6 +42,7 @@ const TeamMember: FC = () => {
         </>
       )}
       {data?.category.toLowerCase() === 'hr' && <TeamMemberHrPlans />}
+      {data && <TMScheduleForm />}
       {data && <TeamMemberSchedule />}
       {!data && !isFetching && (
         <EmptyData title='Не знайдено інформації по даному співробітнику' />
