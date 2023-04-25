@@ -7,7 +7,9 @@ const TMScheduleGeneral: FC<{ data: IEmployee }> = ({ data: { schedule } }) => {
       <h2 className='text-l leading-l font-bold mb-[20px]'>Графік роботи</h2>
       {schedule?.map((monthSchedule) => {
         for (let month in monthSchedule) {
-          const dates = monthSchedule[month];
+          const dates = [...monthSchedule[month]].sort(
+            (a, b) => parseFloat(a.date) - parseFloat(b.date)
+          );
           return (
             <div className='mb-[25px]' key={month}>
               <h3 className='mb-[10px] text-black font-semibold ml-[7px]'>

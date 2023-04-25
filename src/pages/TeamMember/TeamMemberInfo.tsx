@@ -1,9 +1,10 @@
 import { FC, memo, useMemo } from 'react';
+import useTypedSelector from '@/store/storeHooks/useTypedSelector';
+//
 import { teamStyles } from '@/styles/teamStyles';
 import { IEmployee } from '@/types/employee';
 import { unnamed } from '@/data/imagesStore';
 import { convertDate } from '@/utils/additionalFunc/dateConvert';
-import useTypedSelector from '@/store/storeHooks/useTypedSelector';
 
 const TeamMemberInfo: FC<{ data: IEmployee }> = ({ data }) => {
   const user = useTypedSelector((state) => state.persistSlice.authData);
