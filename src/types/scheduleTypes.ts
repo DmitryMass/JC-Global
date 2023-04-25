@@ -10,3 +10,10 @@ export interface IMarkTheShiftData {
   dayWorkedCount?: number;
   schedule?: string;
 }
+
+export interface IArchiveScheduleData {
+  date: string;
+  month: string;
+  id: string;
+  role?: string;
+}

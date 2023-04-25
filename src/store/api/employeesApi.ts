@@ -1,6 +1,6 @@
 import { IEmployee } from '@/types/employee';
 import { IEmployeesCategory } from '@/types/employeesCategory';
-import { IMarkTheShiftData } from '@/types/scheduleTypes';
+import { IArchiveScheduleData, IMarkTheShiftData } from '@/types/scheduleTypes';
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
 const URL = 'http://localhost:5005';
@@ -16,6 +16,7 @@ export const employeesApi = createApi({
       }),
       transformResponse: (response: IEmployeesCategory[]): IEmployeesCategory =>
         Object.values(response)[0],
+      providesTags: [{ type: 'Employee', id: 'categories' }],
     }),
     getEmployee: build.query<IEmployee, string>({
       query: (id) => ({
@@ -67,6 +68,30 @@ export const employeesApi = createApi({
       }),
       invalidatesTags: [{ type: 'Employee', id: 'employeeId' }],
     }),
+    setArchiveEmployeeSchedule: build.mutation<
+      { msg: string },
+      IArchiveScheduleData
+    >({
+      query: ({ month, date, id, role }) => ({
+        url: `/admin/schedule/archive/${id}`,
+        method: 'POST',
+        body: { month, date },
+        headers: {
+          role,
+        },
+      }),
+      invalidatesTags: [{ type: 'Employee', id: 'employeeId' }],
+    }),
+    fireEmployee: build.mutation<{ msg: string }, string>({
+      query: (id) => ({
+        url: `/employees/${id}`,
+        method: 'DELETE',
+      }),
+      invalidatesTags: [
+        { type: 'Employee', id: 'employeeId' },
+        { type: 'Employee', id: 'categories' },
+      ],
+    }),
   }),
 });
 
@@ -77,4 +102,6 @@ export const {
   useSetEmployeePlanActiveMutation,
   useMarkTheShiftMutation,
   useSetEmployeeScheduleMutation,
+  useSetArchiveEmployeeScheduleMutation,
+  useFireEmployeeMutation,
 } = employeesApi;

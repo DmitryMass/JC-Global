@@ -22,10 +22,27 @@ export const teamStyles = {
     'text-white text-sm leading-sm font-medium pointer-events-none',
   // team members
   memberWrapper:
-    'bg-white rounded-[6px] p-[20px] flex items-center max-[768px]:flex-col max-[768px]:w-full gap-[20px] shadow-md max-[768px]:text-center justify-center mb-[20px] max-[768px]:gap-[10px] ',
+    'bg-white relative rounded-[6px] p-[20px] flex items-center max-[768px]:flex-col max-[768px]:w-full gap-[20px] shadow-md max-[768px]:text-center justify-center mb-[20px] max-[768px]:gap-[10px] max-[768px]:pb-[50px] ',
   memberPhoto:
     'max-w-[180px] w-full h-[200px] object-cover ml-[-60px]  rounded-[24px] shadow-md  max-[992px]:ml-[-30px] max-[768px]:mt-[-20px] max-[768px]:ml-0 max-[768px]:h-[200px]',
   memberJobTitle: 'text-darkBlue font-bold text-xl leading-xl mb-[5px]',
   memberAdditional:
     'text-classic leading-classic font-medium mb-[5px] text-darkBlue',
+  // general and TeamMember Scheudle.
+  gridWrapper:
+    'grid grid-cols-7 max-[992px]:grid-cols-4 max-[768px]:grid-cols-3 max-[576px]:grid-cols-2 max-[400px]:grid-cols-1 gap-[5px]',
+  workDayFlexWrapperGeneral:
+    'flex flex-col items-center gap-[5px] min-h-[150px] px-[5px] py-[10px] rounded-[6px] bg-blue-300',
+  workDayFlexWrapperMember:
+    'flex  flex-col items-center gap-[5px] min-h-[80px] px-[5px] py-[5px] rounded-[6px] bg-blue-300',
+  workDayFlexInfoWrapper:
+    'flex  flex-col items-center gap-[5px] flex-1 px-[5px] py-[10px] rounded-[6px] bg-blue-300',
+  workDayMemberBtn:
+    'text-sm font-semibold text-white leading-sm p-[5px] rounded-[6px] w-full',
+  workDayInput:
+    'bg-white text-blue-600 text-sm font-semibold rounded-[6px] w-full px-[5px] py-[3px] outline-none',
+  workDayAdminEditBtn:
+    'bg-blue-600 py-[3px] px-[5px] rounded-[6px] text-white block w-full text-sm font-semibold',
+  spanLoaderFixed:
+    'fixed flex justify-center items-center w-full h-full inset-0 bg-darkBlue bg-opacity-40',
 };

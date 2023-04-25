@@ -11,7 +11,7 @@ export const registerValidation = yup.object().shape({
     .string()
     .min(6, 'Мінімум 6 символів')
     .max(30, 'Максимум 30 символів')
-    .required('Введіть заголовок новини'),
+    .required('Введіть пароль'),
   jobTitle: yup
     .string()
     .min(3, 'Мінімум 3 символи')

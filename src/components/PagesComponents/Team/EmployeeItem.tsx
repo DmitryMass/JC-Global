@@ -1,8 +1,15 @@
 import { FC } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useFireEmployeeMutation } from '@/store/api/employeesApi';
+import useTypedSelector from '@/store/storeHooks/useTypedSelector';
+//
+import ErrorModal from '@/components/ErrorModal/ErrorModal';
+//
 import { IEmployee } from '@/types/employee';
 import { admin, employeeDetails } from '@/data/svgStore';
 import { teamStyles } from '@/styles/teamStyles';
+import { CustomError } from '@/types/errors';
+import Loader from '@/components/Loader/Loader';
 
 interface IEmployeeItemProps {
   item: IEmployee;
@@ -10,14 +17,36 @@ interface IEmployeeItemProps {
 
 const EmployeeItem: FC<IEmployeeItemProps> = ({ item }) => {
   const navigate = useNavigate();
+  const user = useTypedSelector((state) => state.persistSlice.authData);
+  const [fireEmployee, { isLoading, isError, error }] =
+    useFireEmployeeMutation();
+
+  const handleDelete = async (id: string) => {
+    await fireEmployee(id);
+  };
+
   return (
     <div className={teamStyles.teamSliderItem}>
+      {isError ? (
+        <ErrorModal
+          isError={isError}
+          error={(error as CustomError)?.data?.msg}
+        />
+      ) : null}
       <button
         onClick={() => navigate(`/team/${item._id}`)}
         className={teamStyles.teamSliderItemDetailsBtn}
       >
         <img className='max-w-full' src={employeeDetails} alt='details' />
       </button>
+      {user?.role === 'admin' ? (
+        <button
+          onClick={() => handleDelete(item._id!)}
+          className='absolute top-[-10px] left-[-10px] bg-red-800 px-[5px] py-[2px] text-sm font-bold rounded-[4px] text-white hover:bg-red-600'
+        >
+          {isLoading ? <Loader /> : 'Звільнити'}
+        </button>
+      ) : null}
       <div className={teamStyles.teamSliderItemBox}>
         <img
           className={teamStyles.teamSliderItemImg}

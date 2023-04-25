@@ -4,7 +4,6 @@ import { useGetEmployeeQuery } from '@/store/api/employeesApi';
 //
 import ContentWrapper from '@/components/ContentWrapper/ContentWrapper';
 import MemberTitle from '@/components/PagesComponents/Team/MemberTitle';
-import Loader from '@/components/Loader/Loader';
 import ErrorModal from '@/components/ErrorModal/ErrorModal';
 import DoubleSkelet from '@/components/Skeletons/DoubleSkelet';
 import TeamMemberPlans from './TeamMemberPlans';
@@ -25,7 +24,6 @@ const TeamMember: FC = () => {
       skip: !id,
     }
   );
-
   return (
     <ContentWrapper>
       {isError && (
@@ -34,24 +32,24 @@ const TeamMember: FC = () => {
           error={(error as CustomError)?.data?.msg}
         />
       )}
-      <MemberTitle name={data ? data.fullName : <Loader />} />
+      <MemberTitle name={data ? data.fullName : null} />
       {isLoading && <DoubleSkelet />}
-      {data && (
+      {data?._id && (
         <>
           <TeamMemberInfo data={data} />
-          {data?.category.toLowerCase() === 'sales' && (
+          {data?.category?.toLowerCase() === 'sales' && (
             <>
               <TMPlanForm data={data} />
               <TeamMemberPlans data={data} />
             </>
           )}
-          {data?.category.toLowerCase() === 'hr' && <TeamMemberHrPlans />}
+          {data?.category?.toLowerCase() === 'hr' && <TeamMemberHrPlans />}
           <TMScheduleForm id={id as string} />
           <TMScheduleGeneral id={id as string} data={data} />
         </>
       )}
-      {!data && !isFetching && (
-        <EmptyData title='Не знайдено інформації по даному співробітнику' />
+      {!data?._id && !isFetching && (
+        <EmptyData title='Не знайдено інформації по співробітнику' />
       )}
     </ContentWrapper>
   );

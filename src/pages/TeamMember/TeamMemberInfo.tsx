@@ -6,7 +6,7 @@ import { IEmployee } from '@/types/employee';
 import { unnamed } from '@/data/imagesStore';
 import { convertDate } from '@/utils/additionalFunc/dateConvert';
 
-const TeamMemberInfo: FC<{ data: IEmployee }> = ({ data }) => {
+const TeamMemberInfo: FC<{ data: IEmployee; id?: string }> = ({ data }) => {
   const user = useTypedSelector((state) => state.persistSlice.authData);
   const createDate = useMemo(
     () => convertDate(data?.createdAt as string),

@@ -1,45 +1,53 @@
-import { FC, memo, useRef, useState } from 'react';
-import { useMarkTheShiftMutation } from '@/store/api/employeesApi';
+import { FC, memo } from 'react';
+import { useEditSchedule } from '@/hooks/useEditSchedule';
+//
+import ErrorModal from '@/components/ErrorModal/ErrorModal';
+import Loader from '@/components/Loader/Loader';
+import FixedLoader from '@/components/FixedLoader/FixedLoader';
 //
 import { IEmployee } from '@/types/employee';
-import { IMarkTheShiftData } from '@/types/scheduleTypes';
-import useTypedSelector from '@/store/storeHooks/useTypedSelector';
-import ErrorModal from '@/components/ErrorModal/ErrorModal';
 import { CustomError } from '@/types/errors';
-import Loader from '@/components/Loader/Loader';
+import { teamStyles } from '@/styles/teamStyles';
+import { useArchiveSchedule } from '@/hooks/useArchiveSchedule';
+import { archive } from '@/data/svgStore';
 
 const TMScheduleGeneral: FC<{ data: IEmployee; id: string }> = ({
   data: { schedule },
   id,
 }) => {
-  const user = useTypedSelector((state) => state.persistSlice.authData);
-  const [editInput, setEditInput] = useState<string>('1');
-  const inputRef = useRef<any>('');
-  const [markTheShift, { isLoading, isError, error }] =
-    useMarkTheShiftMutation();
+  const {
+    inputRef,
+    user,
+    editInput,
+    setEditInput,
+    isLoading,
+    isError,
+    error,
+    handleMark,
+  } = useEditSchedule();
 
-  const handleMark = async ({ id, month, date }: IMarkTheShiftData) => {
-    const value = inputRef.current?.value;
-    if (value.length && value.trim()) {
-      await markTheShift({
-        id,
-        month,
-        date,
-        schedule: value,
-      });
-      setEditInput('1');
-      return;
-    }
-    alert('Помилка. Пусте поле.');
-  };
+  const {
+    handleArchive,
+    isError: isArchiveError,
+    isLoading: isArchiveLoading,
+    error: isReqError,
+  } = useArchiveSchedule();
+
   return (
     <div className={'bg-white rounded-[6px] p-[20px] shadow-md relative'}>
-      {isError ? (
+      {isArchiveLoading ? <FixedLoader /> : null}
+      {isError && (
         <ErrorModal
           isError={isError}
           error={(error as CustomError)?.data?.msg}
         />
-      ) : null}
+      )}
+      {isArchiveError && (
+        <ErrorModal
+          isError={isArchiveError}
+          error={(isReqError as CustomError)?.data?.msg}
+        />
+      )}
       <h2 className='text-l leading-l font-bold mb-[20px]'>Графік роботи</h2>
       {schedule?.map((monthSchedule) => {
         for (let month in monthSchedule) {
@@ -48,13 +56,26 @@ const TMScheduleGeneral: FC<{ data: IEmployee; id: string }> = ({
           );
           return (
             <div className='mb-[25px]' key={month}>
-              <h3 className='mb-[10px] text-black font-semibold ml-[7px]'>
-                {month}
-              </h3>
-              <div className='grid grid-cols-7 max-[992px]:grid-cols-4 max-[768px]:grid-cols-3 max-[576px]:grid-cols-2 max-[400px]:grid-cols-1 gap-[3px]'>
+              <div className='flex items-center gap-[10px] w-full mb-[10px] ml-[7px]'>
+                <h3 className=' text-black font-semibold '>{month}</h3>
+                {user?.role === 'admin' && (
+                  <button
+                    onClick={() =>
+                      handleArchive({ id, date: dates[0].date, month })
+                    }
+                  >
+                    <img
+                      className='w-[25px] h-[25px]'
+                      src={archive}
+                      alt='archive'
+                    />
+                  </button>
+                )}
+              </div>
+              <div className={teamStyles.gridWrapper}>
                 {dates.map(({ date, schedule }) => (
                   <div
-                    className='flex flex-col items-center gap-[5px] min-h-[150px] px-[5px] py-[10px] rounded-[6px] bg-blue-300'
+                    className={teamStyles.workDayFlexWrapperGeneral}
                     key={date}
                   >
                     <span className='text-sm font-bold text-black text-opacity-70 flex-1'>
@@ -63,11 +84,10 @@ const TMScheduleGeneral: FC<{ data: IEmployee; id: string }> = ({
                     {editInput === date ? (
                       <>
                         {isLoading ? <Loader /> : null}
-                        <Loader />
                         <input
                           ref={inputRef}
                           type='text'
-                          className='bg-white text-blue-600 text-sm font-semibold rounded-[6px] w-full px-[5px] py-[3px] outline-none'
+                          className={teamStyles.workDayInput}
                         />
                       </>
                     ) : (
@@ -83,14 +103,14 @@ const TMScheduleGeneral: FC<{ data: IEmployee; id: string }> = ({
                               ? () => handleMark({ id, month, date })
                               : () => setEditInput(date)
                           }
-                          className='bg-blue-600 py-[3px] px-[5px] rounded-[6px] text-white block w-full text-sm font-semibold'
+                          className={teamStyles.workDayAdminEditBtn}
                         >
                           {editInput === date ? 'Зберегти' : 'Редагувати'}
                         </button>
                         {editInput === date ? (
                           <button
                             onClick={() => setEditInput('1')}
-                            className='bg-blue-600 py-[3px] px-[5px] rounded-[6px] text-white block w-full text-sm font-semibold'
+                            className={teamStyles.workDayAdminEditBtn}
                           >
                             Відміна
                           </button>

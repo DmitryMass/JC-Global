@@ -1,7 +1,6 @@
 import { FC } from 'react';
-import { format } from 'date-fns';
+import { useEditSchedule } from '@/hooks/useEditSchedule';
 //
-import { useMarkTheShiftMutation } from '@/store/api/employeesApi';
 //
 import ErrorModal from '@/components/ErrorModal/ErrorModal';
 import Loader from '@/components/Loader/Loader';
@@ -9,50 +8,24 @@ import Loader from '@/components/Loader/Loader';
 import { CustomError } from '@/types/errors';
 import { optionLabel } from '@/data/scheduleDate';
 import { IEmployee } from '@/types/employee';
-import { IMarkTheShiftData } from '@/types/scheduleTypes';
+import { teamStyles } from '@/styles/teamStyles';
+import FixedLoader from '@/components/FixedLoader/FixedLoader';
 
 const TeamMemberSchedule: FC<{ data: IEmployee; id: string }> = ({
   data: { schedule },
   id,
 }) => {
-  const [markTheShift, { isLoading, isError, error }] =
-    useMarkTheShiftMutation();
-
-  const handleMark = async ({
-    id,
-    dayWorked,
-    dayWorkedCount,
-    month,
-    date,
-  }: IMarkTheShiftData) => {
-    const todayDay = format(new Date(), 'dd.MM.yyyy');
-    if (todayDay !== date) {
-      return alert(
-        'Не можливо відмітитись, оскільки сьогоднішня дата не співпадає з відміченою'
-      );
-    }
-    await markTheShift({
-      id,
-      dayWorked,
-      dayWorkedCount,
-      month,
-      date,
-    });
-  };
+  const { handleMemberMark, isLoading, isError, error } = useEditSchedule();
 
   return (
     <div className={'bg-white rounded-[6px] p-[20px] shadow-md relative'}>
-      {isLoading ? (
-        <span className='fixed flex justify-center items-center w-full h-full inset-0 bg-darkBlue bg-opacity-40'>
-          <Loader />
-        </span>
-      ) : null}
-      {isError ? (
+      {isLoading ? <FixedLoader /> : null}
+      {isError && (
         <ErrorModal
           isError={isError}
           error={(error as CustomError)?.data?.msg}
         />
-      ) : null}
+      )}
       <h2 className='text-l leading-l font-bold mb-[20px]'>Графік роботи</h2>
       {schedule?.map((monthSchedule) => {
         for (let month in monthSchedule) {
@@ -64,13 +37,13 @@ const TeamMemberSchedule: FC<{ data: IEmployee; id: string }> = ({
               <h3 className='mb-[10px] text-black font-semibold ml-[7px]'>
                 {month}
               </h3>
-              <div className='grid grid-cols-7 max-[992px]:grid-cols-5 max-[576px]:grid-cols-3 max-[400px]:grid-cols-2 gap-[3px]'>
+              <div className={teamStyles.gridWrapper}>
                 {dates.map(({ date, schedule, dayWorked }) => (
                   <div
-                    className='flex  flex-col items-center gap-[5px] min-h-[80px] px-[5px] py-[10px] rounded-[6px] bg-blue-300'
+                    className={teamStyles.workDayFlexWrapperMember}
                     key={date}
                   >
-                    <div className='flex  flex-col items-center gap-[5px] flex-1 px-[5px] py-[10px] rounded-[6px] bg-blue-300'>
+                    <div className={teamStyles.workDayFlexInfoWrapper}>
                       <span className='text-sm font-bold text-black text-opacity-70 mb-[15px]'>
                         {date}
                       </span>
@@ -83,7 +56,7 @@ const TeamMemberSchedule: FC<{ data: IEmployee; id: string }> = ({
                         onClick={
                           !dayWorked
                             ? () =>
-                                handleMark({
+                                handleMemberMark({
                                   id,
                                   month,
                                   date,
@@ -94,7 +67,7 @@ const TeamMemberSchedule: FC<{ data: IEmployee; id: string }> = ({
                         }
                         className={`${
                           dayWorked ? 'bg-green-500' : 'bg-red-500'
-                        } text-sm font-semibold text-white leading-sm p-[5px] rounded-[6px] w-full  `}
+                        } ${teamStyles.workDayMemberBtn}  `}
                       >
                         Відмітка
                       </button>

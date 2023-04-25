@@ -21,12 +21,12 @@ const Account: FC = () => {
 
   return (
     <ContentWrapper>
-      {isError ? (
+      {isError && (
         <ErrorModal
           isError={isError}
           error={(error as CustomError)?.data?.msg}
         />
-      ) : null}
+      )}
       {isLoading ? <DoubleSkelet /> : null}
       {data ? (
         <>
