@@ -4,12 +4,12 @@ import { useFireEmployeeMutation } from '@/store/api/employeesApi';
 import useTypedSelector from '@/store/storeHooks/useTypedSelector';
 //
 import ErrorModal from '@/components/ErrorModal/ErrorModal';
+import Loader from '@/components/Loader/Loader';
 //
 import { IEmployee } from '@/types/employee';
 import { admin, employeeDetails } from '@/data/svgStore';
 import { teamStyles } from '@/styles/teamStyles';
 import { CustomError } from '@/types/errors';
-import Loader from '@/components/Loader/Loader';
 
 interface IEmployeeItemProps {
   item: IEmployee;
@@ -42,7 +42,7 @@ const EmployeeItem: FC<IEmployeeItemProps> = ({ item }) => {
       {user?.role === 'admin' ? (
         <button
           onClick={() => handleDelete(item._id!)}
-          className='absolute top-[-10px] left-[-10px] bg-red-800 px-[5px] py-[2px] text-sm font-bold rounded-[4px] text-white hover:bg-red-600'
+          className={teamStyles.fireBtn}
         >
           {isLoading ? <Loader /> : 'Звільнити'}
         </button>

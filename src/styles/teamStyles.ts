@@ -28,6 +28,8 @@ export const teamStyles = {
   memberJobTitle: 'text-darkBlue font-bold text-xl leading-xl mb-[5px]',
   memberAdditional:
     'text-classic leading-classic font-medium mb-[5px] text-darkBlue',
+  fireBtn:
+    'absolute top-[-10px] left-[-10px] bg-red-800 px-[5px] py-[2px] text-sm font-bold rounded-[4px] text-white hover:bg-red-600',
   // general and TeamMember Scheudle.
   gridWrapper:
     'grid grid-cols-7 max-[992px]:grid-cols-4 max-[768px]:grid-cols-3 max-[576px]:grid-cols-2 max-[400px]:grid-cols-1 gap-[5px]',

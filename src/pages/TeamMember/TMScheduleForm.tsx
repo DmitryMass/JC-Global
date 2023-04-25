@@ -1,9 +1,7 @@
-import { FC, memo, useState } from 'react';
+import { FC, memo } from 'react';
 import DatePicker from 'react-datepicker';
-import { Field, FieldProps, Formik, FormikHelpers } from 'formik';
-import { format } from 'date-fns';
-import useTypedSelector from '@/store/storeHooks/useTypedSelector';
-import { useSetEmployeeScheduleMutation } from '@/store/api/employeesApi';
+import { Field, FieldProps, Formik } from 'formik';
+import { useSetSchedule } from '@/hooks/useSetSchedule';
 //
 import ErrorModal from '@/components/ErrorModal/ErrorModal';
 import Loader from '@/components/Loader/Loader';
@@ -17,36 +15,16 @@ import { IOptions } from '@/types/scheduleTypes';
 import { optionsSchedule } from '@/data/scheduleDate';
 import 'react-datepicker/dist/react-datepicker.css';
 
-interface IInitialValues {
-  schedule: string;
-  custom: string;
-  month: string;
-}
-
 const TMScheduleForm: FC<{ id: string }> = ({ id }) => {
-  const [startDate, setStartDate] = useState<Date>(new Date());
-  const user = useTypedSelector((state) => state.persistSlice.authData);
-  const [setEmployeeSchedule, { isLoading, isError, error }] =
-    useSetEmployeeScheduleMutation();
-
-  const handleSubmit = async (
-    values: IInitialValues,
-    actions: FormikHelpers<IInitialValues>
-  ) => {
-    const formatedDate = format(startDate, 'dd.MM.yyyy');
-    try {
-      const body = new FormData();
-      Object.entries(values).forEach((item) => {
-        body.append(item[0], item[1]);
-      });
-      body.append('date', formatedDate);
-      actions.resetForm();
-      await setEmployeeSchedule({ data: body, id, role: user?.role as string });
-    } catch (err) {
-      console.error(err);
-    }
-  };
-
+  const {
+    error,
+    handleSubmit,
+    isError,
+    isLoading,
+    setStartDate,
+    startDate,
+    user,
+  } = useSetSchedule(id);
   return (
     <>
       {isError ? (
