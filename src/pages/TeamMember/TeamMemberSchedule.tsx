@@ -1,10 +1,7 @@
 import { FC } from 'react';
 import { format } from 'date-fns';
 //
-import {
-  IMarkTheShiftData,
-  useMarkTheShiftMutation,
-} from '@/store/api/employeesApi';
+import { useMarkTheShiftMutation } from '@/store/api/employeesApi';
 //
 import ErrorModal from '@/components/ErrorModal/ErrorModal';
 import Loader from '@/components/Loader/Loader';
@@ -12,6 +9,7 @@ import Loader from '@/components/Loader/Loader';
 import { CustomError } from '@/types/errors';
 import { optionLabel } from '@/data/scheduleDate';
 import { IEmployee } from '@/types/employee';
+import { IMarkTheShiftData } from '@/types/scheduleTypes';
 
 const TeamMemberSchedule: FC<{ data: IEmployee; id: string }> = ({
   data: { schedule },
@@ -58,7 +56,9 @@ const TeamMemberSchedule: FC<{ data: IEmployee; id: string }> = ({
       <h2 className='text-l leading-l font-bold mb-[20px]'>Графік роботи</h2>
       {schedule?.map((monthSchedule) => {
         for (let month in monthSchedule) {
-          const dates = monthSchedule[month];
+          const dates = [...monthSchedule[month]].sort(
+            (a, b) => parseFloat(a.date) - parseFloat(b.date)
+          );
           return (
             <div className='mb-[25px]' key={month}>
               <h3 className='mb-[10px] text-black font-semibold ml-[7px]'>
@@ -67,15 +67,17 @@ const TeamMemberSchedule: FC<{ data: IEmployee; id: string }> = ({
               <div className='grid grid-cols-7 max-[992px]:grid-cols-5 max-[576px]:grid-cols-3 max-[400px]:grid-cols-2 gap-[3px]'>
                 {dates.map(({ date, schedule, dayWorked }) => (
                   <div
-                    className='flex flex-col items-center gap-[10px] px-[5px] py-[10px] rounded-[6px] bg-blue-300 '
+                    className='flex  flex-col items-center gap-[5px] min-h-[80px] px-[5px] py-[10px] rounded-[6px] bg-blue-300'
                     key={date}
                   >
-                    <span className='text-sm font-bold text-black text-opacity-70 flex-1'>
-                      {date}
-                    </span>
-                    <span className='text-sm font-bold flex-1 text-blue-600'>
-                      {schedule}
-                    </span>
+                    <div className='flex  flex-col items-center gap-[5px] flex-1 px-[5px] py-[10px] rounded-[6px] bg-blue-300'>
+                      <span className='text-sm font-bold text-black text-opacity-70 mb-[15px]'>
+                        {date}
+                      </span>
+                      <span className='text-sm font-bold  text-blue-600 flex-shrink'>
+                        {schedule}
+                      </span>
+                    </div>
                     {optionLabel.includes(schedule) ? null : (
                       <button
                         onClick={
@@ -92,7 +94,7 @@ const TeamMemberSchedule: FC<{ data: IEmployee; id: string }> = ({
                         }
                         className={`${
                           dayWorked ? 'bg-green-500' : 'bg-red-500'
-                        } text-sm font-semibold text-white leading-sm p-[5px] rounded-[6px] flex-1`}
+                        } text-sm font-semibold text-white leading-sm p-[5px] rounded-[6px] w-full  `}
                       >
                         Відмітка
                       </button>

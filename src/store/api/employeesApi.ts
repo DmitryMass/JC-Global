@@ -1,16 +1,9 @@
 import { IEmployee } from '@/types/employee';
 import { IEmployeesCategory } from '@/types/employeesCategory';
+import { IMarkTheShiftData } from '@/types/scheduleTypes';
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
 const URL = 'http://localhost:5005';
-
-export interface IMarkTheShiftData {
-  month: string;
-  date: string;
-  id: string;
-  dayWorked: boolean;
-  dayWorkedCount: number;
-}
 
 export const employeesApi = createApi({
   reducerPath: 'employeesApi',
@@ -53,10 +46,10 @@ export const employeesApi = createApi({
       invalidatesTags: [{ type: 'Employee', id: 'employeeId' }],
     }),
     markTheShift: build.mutation<{ msg: string }, IMarkTheShiftData>({
-      query: ({ id, dayWorked, dayWorkedCount, date, month }) => ({
+      query: ({ id, dayWorked, dayWorkedCount, date, month, schedule }) => ({
         url: `/admin/schedule/${id}`,
         method: 'PUT',
-        body: { dayWorked, dayWorkedCount, date, month },
+        body: { dayWorked, dayWorkedCount, date, month, schedule },
       }),
       invalidatesTags: [{ type: 'Employee', id: 'employeeId' }],
     }),

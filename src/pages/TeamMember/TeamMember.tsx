@@ -46,8 +46,8 @@ const TeamMember: FC = () => {
             </>
           )}
           {data?.category.toLowerCase() === 'hr' && <TeamMemberHrPlans />}
-          <TMScheduleForm id={id! as string} />
-          <TMScheduleGeneral data={data} />
+          <TMScheduleForm id={id as string} />
+          <TMScheduleGeneral id={id as string} data={data} />
         </>
       )}
       {!data && !isFetching && (
