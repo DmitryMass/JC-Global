@@ -3,13 +3,12 @@ import { useEditSchedule } from '@/hooks/useEditSchedule';
 //
 //
 import ErrorModal from '@/components/ErrorModal/ErrorModal';
-import Loader from '@/components/Loader/Loader';
+import FixedLoader from '@/components/FixedLoader/FixedLoader';
 //
 import { CustomError } from '@/types/errors';
 import { optionLabel } from '@/data/scheduleDate';
 import { IEmployee } from '@/types/employee';
 import { teamStyles } from '@/styles/teamStyles';
-import FixedLoader from '@/components/FixedLoader/FixedLoader';
 
 const TeamMemberSchedule: FC<{ data: IEmployee; id: string }> = ({
   data: { schedule },

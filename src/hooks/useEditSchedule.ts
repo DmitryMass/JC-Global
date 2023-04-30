@@ -3,6 +3,7 @@ import useTypedSelector from '@/store/storeHooks/useTypedSelector';
 import { useMarkTheShiftMutation } from '@/store/api/employeesApi';
 import { IMarkTheShiftData } from '@/types/scheduleTypes';
 import { format } from 'date-fns';
+import { schemaTMScheduleEdit } from '@/utils/validationSchemas/inputWithoutFormikValidation';
 
 export const useEditSchedule = () => {
   const inputRef = useRef<HTMLInputElement>(null);
@@ -13,7 +14,8 @@ export const useEditSchedule = () => {
 
   const handleMark = async ({ id, month, date }: IMarkTheShiftData) => {
     const value = inputRef.current?.value;
-    if (value?.length && value.trim()) {
+    try {
+      await schemaTMScheduleEdit.validate(value);
       await markTheShift({
         id,
         month,
@@ -22,8 +24,15 @@ export const useEditSchedule = () => {
       });
       setEditInput('1');
       return;
+    } catch (err: any) {
+      if (err.type === 'oneOf') {
+        return alert(
+          'Треба обрати один з цих параметрів: "8:00 - 18:00", "8:00 - 14:00", "12:00 - 18:00", "Вихідний", "Відпустка", "Лікарняний"", "Сім.об або інше"'
+        );
+      } else {
+        console.error(err);
+      }
     }
-    alert('Помилка. Пусте поле.');
   };
 
   //
