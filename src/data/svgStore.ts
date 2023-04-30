@@ -30,6 +30,7 @@ import archive from '@/assets/icons/archive.svg';
 import openFolder from '@/assets/icons/open_folder.svg';
 import details from '@/assets/icons/details_logo.svg';
 import employeeDetails from '@/assets/icons/employee_details.svg';
+import editMember from '@/assets/icons/editMember.svg';
 
 export {
   add,
@@ -47,6 +48,7 @@ export {
   deleteLogo,
   close,
   edit,
+  editMember,
   backToScreen,
   mobileMenu,
   noPhotoUser,

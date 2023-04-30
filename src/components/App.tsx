@@ -23,6 +23,7 @@ import {
 //
 import './App.scss';
 import MemberEdit from './PagesComponents/Team/MemberEdit';
+import AccountSettings from './PagesComponents/Account/AccountSettings';
 
 const App: FC = () => {
   const user = useTypedSelector((state) => state.persistSlice.authData);
@@ -59,6 +60,7 @@ const App: FC = () => {
           <Route path={ROUTE.TEAM} element={<Team />} />
           <Route path={ROUTE.TEAM_MEMBER} element={<TeamMember />} />
           <Route path={ROUTE.ACCOUNT} element={<Account />} />
+          <Route path={ROUTE.ACCOUNT_SETTINGS} element={<AccountSettings />} />
           <Route path={'/team/:id/edit'} element={<MemberEdit />} />
         </Route>
         <Route

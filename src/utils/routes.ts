@@ -9,4 +9,5 @@ export const ROUTE = {
   ADMINPANEL: '/admin',
   ADMIN_EMP_REGISTER: '/admin/empregister',
   ACCOUNT: '/account',
+  ACCOUNT_SETTINGS: '/account/settings',
 };

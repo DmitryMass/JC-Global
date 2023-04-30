@@ -1,19 +1,21 @@
 import { FC, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import useTypedSelector from '@/store/storeHooks/useTypedSelector';
 //
 import Logo from '../Logo/Logo';
 //
 import { headerStyles } from '@/styles/headerStyles';
 import LeftBarMenus from '../LeftBarMenu/LeftBarMenu';
-import { exit, mobileMenu } from '@/data/svgStore';
+import { editMember, exit, mobileMenu } from '@/data/svgStore';
 import { useDispatch } from 'react-redux';
 import useActions from '@/store/storeHooks/useActions';
 
 const Header: FC = () => {
   const [menu, setMenu] = useState<boolean>(false);
+  const user = useTypedSelector((state) => state.persistSlice.authData);
   const dispatch = useDispatch();
   const { logOut } = useActions();
+  const navigate = useNavigate();
 
   return (
     <header className={headerStyles.header}>
@@ -23,6 +25,11 @@ const Header: FC = () => {
           modificator='w-[120px] h-[60px] min-[768px]:ml-[20px]'
         />
         <div className='flex items-center gap-[20px]'>
+          {user?.role !== 'admin' ? (
+            <button onClick={() => navigate('/account/settings')}>
+              <img className='w-[30px] h-[30px]' src={editMember} alt='edit' />
+            </button>
+          ) : null}
           <button onClick={() => dispatch(logOut())}>
             <img className='w-[30px] h-[30px]' src={exit} alt='exit' />
           </button>
