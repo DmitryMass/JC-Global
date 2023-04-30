@@ -1,17 +1,12 @@
 import * as yup from 'yup';
 
-export const registerValidation = yup.object().shape({
+export const editMemberValidation = yup.object().shape({
   email: yup
     .string()
     .email('example@gmail.com')
     .max(70, 'Максимум 70 символів')
     .matches(/^[0-9_-a-zA-Z.@/s]*$/gi, 'Тільки Англ символи')
     .required(`Обов'язкове поле`),
-  password: yup
-    .string()
-    .min(6, 'Мінімум 6 символів')
-    .max(30, 'Максимум 30 символів')
-    .required('Введіть пароль'),
   jobTitle: yup
     .string()
     .min(2, 'Мінімум 2 символи')

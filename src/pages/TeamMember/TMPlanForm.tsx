@@ -99,7 +99,6 @@ const TMPlanForm: FC<{ data: IEmployee }> = ({ data }) => {
                         onChange={handleChange}
                         onBlur={handleBlur}
                         value={values.frontPlan}
-                        type='frontPlan'
                         name='frontPlan'
                         placeholder='FrontEnd план'
                       />
@@ -119,7 +118,6 @@ const TMPlanForm: FC<{ data: IEmployee }> = ({ data }) => {
                         onChange={handleChange}
                         onBlur={handleBlur}
                         value={values.backPlan}
-                        type='backPlan'
                         name='backPlan'
                         placeholder='BackEnd план'
                       />

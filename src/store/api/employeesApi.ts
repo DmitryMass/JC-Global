@@ -92,6 +92,17 @@ export const employeesApi = createApi({
         { type: 'Employee', id: 'categories' },
       ],
     }),
+    editEmployeeData: build.mutation<
+      { msg: string },
+      { data: FormData; id: string }
+    >({
+      query: ({ data, id }) => ({
+        url: `/employees/employee/${id}`,
+        method: 'PUT',
+        body: data,
+      }),
+      invalidatesTags: [{ type: 'Employee', id: 'employeeId' }],
+    }),
   }),
 });
 
@@ -104,4 +115,5 @@ export const {
   useSetEmployeeScheduleMutation,
   useSetArchiveEmployeeScheduleMutation,
   useFireEmployeeMutation,
+  useEditEmployeeDataMutation,
 } = employeesApi;

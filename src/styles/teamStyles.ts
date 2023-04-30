@@ -12,10 +12,10 @@ export const teamStyles = {
   teamSliderItem: 'w-full min-h-[180px] flex flex-col relative ',
   teamSliderItemDetailsBtn: 'absolute top-0 right-0 w-[30px] h-[30px]',
   teamSliderItemBox:
-    'mx-auto mt-[10px] h-[70px] flex justify-center items-center mb-[20px]',
+    'mx-auto mt-[15px] h-[70px] flex justify-center items-center mb-[20px]',
   teamSliderItemImg:
     'drop-shadow-[0_0px_20px_rgba(255,98,98,1)] rounded-full w-[70px] max-h-[70px] h-full object-cover object-center',
-  teamSliderItemBoxInfo: 'text-center min-h-[80px] flex-1',
+  teamSliderItemBoxInfo: 'text-center min-h-[80px] flex-1 pb-[20px]',
   teamSliderItemBoxTitle:
     'text-white text-sm leading-sm font-medium mb-[10px] pointer-events-none',
   teamSliderItemBoxFullName:
@@ -30,6 +30,8 @@ export const teamStyles = {
     'text-classic leading-classic font-medium mb-[5px] text-darkBlue',
   fireBtn:
     'absolute top-[-10px] left-[-10px] bg-red-800 px-[5px] py-[2px] text-sm font-bold rounded-[4px] text-white hover:bg-red-600',
+  editBtn:
+    'absolute bottom-[-10px] left-[-10px] bg-green-800 px-[5px] py-[2px]  text-sm font-bold rounded-[4px] text-white hover:bg-green-600',
   // general and TeamMember Scheudle.
   gridWrapper:
     'grid grid-cols-7 max-[992px]:grid-cols-4 max-[768px]:grid-cols-3 max-[576px]:grid-cols-2 max-[400px]:grid-cols-1 gap-[5px]',

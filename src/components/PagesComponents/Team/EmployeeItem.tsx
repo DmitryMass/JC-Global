@@ -40,12 +40,21 @@ const EmployeeItem: FC<IEmployeeItemProps> = ({ item }) => {
         <img className='max-w-full' src={employeeDetails} alt='details' />
       </button>
       {user?.role === 'admin' ? (
-        <button
-          onClick={() => handleDelete(item._id!)}
-          className={teamStyles.fireBtn}
-        >
-          {isLoading ? <Loader /> : 'Звільнити'}
-        </button>
+        <>
+          <button
+            onClick={() => handleDelete(item._id!)}
+            className={teamStyles.fireBtn}
+          >
+            {isLoading ? <Loader /> : 'Звільнити'}
+          </button>
+          <button
+            onClick={() => navigate(`/team/${item._id}/edit`)}
+            className={teamStyles.editBtn}
+          >
+            {/* {isLoading ? <Loader /> : 'Редагувати'} */}
+            Редагувати
+          </button>
+        </>
       ) : null}
       <div className={teamStyles.teamSliderItemBox}>
         <img

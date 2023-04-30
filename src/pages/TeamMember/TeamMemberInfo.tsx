@@ -17,7 +17,7 @@ const TeamMemberInfo: FC<{ data: IEmployee; id?: string }> = ({ data }) => {
       <img
         className={`${teamStyles.memberPhoto} ${
           data.photoPath ? '' : 'drop-shadow-[2px_4px_4px_rgba(0,0,0,1)]'
-        }`}
+        } `}
         src={
           data.photoPath
             ? `http://localhost:5005/assets/${data.photoPath}`

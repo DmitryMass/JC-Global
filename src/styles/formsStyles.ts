@@ -8,7 +8,7 @@ export const formStyles = {
   inputGoal:
     'w-full outline-none border-[1px] border-opacity-10 border-black p-[5px] rounded-[4px] text-sm leading-sm font-medium ',
   blueInput:
-    'outline-none border-[2px] border-blue-600 border-opacity-20 rounded-[4px] w-full p-[10px] font-semibold text-m leading-m bg-blue-50 placeholder:text-blue-400 placeholder:font-medium placeholder:opacity-90  focus:border-opacity-50',
+    'outline-none border-[2px] border-blue-600 border-opacity-20 rounded-[4px] w-full p-[10px] font-semibold text-m leading-m bg-blue-50 placeholder:text-blue-400 placeholder:font-medium placeholder:opacity-90  focus:border-opacity-50 text-blue-600',
   blueDropzone:
     'border-[2px] border-blue-600 border-opacity-20 rounded-[4px] w-full p-[10px] font-semibold text-m leading-m bg-blue-50 flex justify-center items-center gap-[15px]',
 };
