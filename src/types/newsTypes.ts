@@ -6,3 +6,10 @@ export interface INews {
   checked: any[];
   createdAt: string;
 }
+
+export interface INewsEditData {
+  id: string;
+  role: string;
+  header: string;
+  text: string;
+}

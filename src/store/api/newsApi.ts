@@ -1,4 +1,4 @@
-import { INews } from '@/types/newsTypes';
+import { INews, INewsEditData } from '@/types/newsTypes';
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
 const URL = 'http://localhost:5005';
@@ -44,8 +44,21 @@ export const newsApi = createApi({
       }),
       invalidatesTags: [{ type: 'News', id: 'newsList' }],
     }),
+    editNews: build.mutation<{ msg: string }, INewsEditData>({
+      query: ({ header, id, role, text }) => ({
+        url: `/admin/news/${id}`,
+        method: 'PUT',
+        body: { header, text },
+        headers: { role },
+      }),
+      invalidatesTags: [{ type: 'News', id: 'newsList' }],
+    }),
   }),
 });
 
-export const { useCreateNewsMutation, useGetNewsQuery, useDeleteNewsMutation } =
-  newsApi;
+export const {
+  useCreateNewsMutation,
+  useGetNewsQuery,
+  useDeleteNewsMutation,
+  useEditNewsMutation,
+} = newsApi;
