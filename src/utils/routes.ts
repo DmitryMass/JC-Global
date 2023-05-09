@@ -10,4 +10,5 @@ export const ROUTE = {
   ADMIN_EMP_REGISTER: '/admin/empregister',
   ACCOUNT: '/account',
   ACCOUNT_SETTINGS: '/account/settings',
+  ADM_RES_PASS: '/admin/resetpassword',
 };

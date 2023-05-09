@@ -122,9 +122,6 @@ const Login: FC = () => {
                   <ButtonSubmit modificator='flex justify-center items-center w-full bg-blue-700 shadow-sm shadow-blue-400 hover:shadow-md hover:shadow-blue-300 transition-all duration-150 p-[10px] rounded-[4px] text-white text-l leading-l mb-[20px]'>
                     {isLoading ? <Loader /> : 'Увійти'}
                   </ButtonSubmit>
-                  <span className='block border-b-[1px] border-blue-200 pb-[70px] text-right text-sm leading-sm text-blue-600'>
-                    Скинути пароль
-                  </span>
                 </form>
               )}
             </Formik>

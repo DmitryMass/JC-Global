@@ -1,4 +1,4 @@
-import { done } from './svgStore';
+import { details, done } from './svgStore';
 import { about, admin, goals, mainPage, team } from './svgStore';
 
 export const leftBarMenu = [
@@ -43,9 +43,9 @@ export const adminMenu = [
   },
   {
     id: '3',
-    link: '/admin/empregistew',
-    title: 'Заглушка',
-    src: `${done}`,
+    link: '/admin/resetpassword',
+    title: 'Відновлення паролю',
+    src: `${details}`,
   },
   {
     id: '4',

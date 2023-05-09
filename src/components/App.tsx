@@ -24,6 +24,7 @@ import {
 import './App.scss';
 import MemberEdit from './PagesComponents/Team/MemberEdit';
 import AccountSettings from './PagesComponents/Account/AccountSettings';
+import ResetPassword from './PagesComponents/Admin/ResetPassword';
 
 const App: FC = () => {
   const user = useTypedSelector((state) => state.persistSlice.authData);
@@ -83,6 +84,7 @@ const App: FC = () => {
             path={ROUTE.ADMIN_EMP_REGISTER}
             element={<EmployeeRegister />}
           />
+          <Route path={ROUTE.ADM_RES_PASS} element={<ResetPassword />} />
         </Route>
       </Routes>
     </div>

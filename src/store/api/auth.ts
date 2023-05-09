@@ -26,7 +26,21 @@ export const authApi = createApi({
         body,
       }),
     }),
+    resetPass: build.mutation<
+      { msg: string },
+      { data: FormData; role: string }
+    >({
+      query: ({ data, role }) => ({
+        url: '/admin/resetpassword',
+        method: 'POST',
+        body: data,
+        headers: {
+          role,
+        },
+      }),
+    }),
   }),
 });
 
-export const { useRegisterMutation, useLoginMutation } = authApi;
+export const { useRegisterMutation, useLoginMutation, useResetPassMutation } =
+  authApi;
