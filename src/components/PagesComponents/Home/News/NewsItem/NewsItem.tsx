@@ -159,8 +159,8 @@ const NewsItem: FC<INewsItemProps> = ({
               <img
                 key={img}
                 className={`${newsItemStyles.img}`}
-                src={`http://localhost:5005/assets/${img}`}
-                alt='test-img'
+                src={`https://jc-server.onrender.com/assets/${img}`}
+                alt='news img'
               />
             ))
           : null}

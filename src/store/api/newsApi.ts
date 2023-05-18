@@ -1,7 +1,7 @@
 import { INews, INewsEditData } from '@/types/newsTypes';
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
-const URL = 'http://localhost:5005';
+const URL = 'https://jc-server.onrender.com';
 
 export const newsApi = createApi({
   reducerPath: 'newsApi',

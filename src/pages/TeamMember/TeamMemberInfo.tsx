@@ -20,7 +20,7 @@ const TeamMemberInfo: FC<{ data: IEmployee; id?: string }> = ({ data }) => {
         } `}
         src={
           data.photoPath
-            ? `http://localhost:5005/assets/${data.photoPath}`
+            ? `https://jc-server.onrender.com/assets/${data.photoPath}`
             : unnamed
         }
         alt='photo'

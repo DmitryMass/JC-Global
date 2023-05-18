@@ -61,7 +61,7 @@ const EmployeeItem: FC<IEmployeeItemProps> = ({ item }) => {
           className={teamStyles.teamSliderItemImg}
           src={
             item.photoPath
-              ? `http://localhost:5005/assets/${item.photoPath}`
+              ? `https://jc-server.onrender.com/assets/${item.photoPath}`
               : admin
           }
           alt='user photo'

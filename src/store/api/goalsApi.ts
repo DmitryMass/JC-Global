@@ -1,7 +1,7 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { IEditGoalData, IGoalsTypes } from '@/types/goalsTypes';
 
-const URL = 'http://localhost:5005';
+const URL = 'https://jc-server.onrender.com';
 
 export const goalsApi = createApi({
   reducerPath: 'goalsApi',

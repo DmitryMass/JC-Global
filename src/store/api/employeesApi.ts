@@ -3,7 +3,7 @@ import { IEmployeesCategory } from '@/types/employeesCategory';
 import { IArchiveScheduleData, IMarkTheShiftData } from '@/types/scheduleTypes';
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
-const URL = 'http://localhost:5005';
+const URL = 'https://jc-server.onrender.com';
 
 export const employeesApi = createApi({
   reducerPath: 'employeesApi',
