@@ -48,3 +48,10 @@ Host для бекенд временный, может быть задержк�
 2. test12345
 
 // либо же ваш личный аккаунт созданый через админ панель.
+
+![DESKTOP!](./src/assets/githubPreview/loginPreview.png)
+![DESKTOP!](./src/assets/githubPreview/goalPreview.png)
+![DESKTOP!](./src/assets/githubPreview/adminPlanPreview.png)
+![DESKTOP!](./src/assets/githubPreview/schedulePreview.png)
+
+etc.
